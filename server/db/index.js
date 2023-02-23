@@ -4,7 +4,7 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const {} =('./Products')
+const {createProduct} = require('./Products')
 
 const syncTables = async()=> {
   const SQL = `
@@ -84,6 +84,26 @@ const syncAndSeed = async()=> {
   console.log('--- seeded users ---');
   console.log(moe);
   console.log(lucy);
+
+  const [wand, staff] = await Promise.all([
+    createProduct({
+      name: "wand",
+      description: "A wooden practice wand for novices.",
+      price: 15,
+      stock: 200,
+      rarity: 1,
+    }),
+    createProduct({
+      name: "staff",
+      description:"A simple wooden staff for novices. Also works as a walking stick",
+      price: 20,
+      stock: 200,
+      rarity:1
+    })
+  ])
+  console.log("--seeded products--");
+  console.log(wand);
+  console.log(staff);
 };
 
 
@@ -92,5 +112,6 @@ module.exports = {
   createUser,
   authenticate,
   getUserByToken,
+  createProduct,
   client
 };
