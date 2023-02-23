@@ -15,11 +15,17 @@ const syncTables = async()=> {
     password VARCHAR(100) NOT NULL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    "isAdministrator" BOOLEAN NOT NULL
+    "isAdministrator" BOOLEAN DEFAULT false
   );
 
     CREATE TABLE products(
-
+     id SERIAL PRIMARY KEY,
+     name VARCHAR(100) UNIQUE NOT NULL,
+     description VARCHAR(250) NOT NULL,
+     price INTEGER NOT NULL,
+     stock INTEGER NOT NULL,
+     rarity INTEGER NOT NULL,
+     "imageURL" VARCHAR(250)  
     );
 
   `;
