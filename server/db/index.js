@@ -8,11 +8,20 @@ const {
 const syncTables = async()=> {
   const SQL = `
   DROP TABLE IF EXISTS users;
+  DROP TABLE IF EXISTS products;
   CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    "isAdministrator" BOOLEAN NOT NULL
   );
+
+    CREATE TABLE products(
+
+    );
+
   `;
   await client.query(SQL);
 };
