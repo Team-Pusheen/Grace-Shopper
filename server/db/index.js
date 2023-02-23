@@ -4,6 +4,7 @@ const {
   createUser,
   authenticate
 } = require('./User');
+const {} =('./Products')
 
 const syncTables = async()=> {
   const SQL = `
