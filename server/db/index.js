@@ -7,6 +7,8 @@ const {
 
 const syncTables = async()=> {
   const SQL = `
+  DROP TABLE IF EXIST reviews
+  DROP TABLE IF EXIST categories
   DROP TABLE IF EXISTS cart_products;
   DROP TABLE IF EXISTS carts;
   DROP TABLE IF EXISTS users;
@@ -23,7 +25,7 @@ const syncTables = async()=> {
     CREATE TABLE products(
      id SERIAL PRIMARY KEY,
      name VARCHAR(100) UNIQUE NOT NULL,
-     description VARCHAR(250) NOT NULL,
+     description TEXT NOT NULL,
      price INTEGER NOT NULL,
      stock INTEGER NOT NULL,
      rarity INTEGER NOT NULL,
@@ -40,6 +42,19 @@ const syncTables = async()=> {
       "productsId" INTEGER REFERENCES products(id),
       "cartId" INTEGER REFERENCES carts(id),
       quantity INTEGER NOT NULL
+    );
+
+    CREATE TABLE categories(
+      id SERIAL PRIMARY KEY,
+      "productsId" INTEGER REFERENCES products(id),
+      category VARCHAR(100) NOT NULL 
+    );
+
+    CREATE TABLE reviews(
+     id SERIAL PRIMARY KEY,
+     "productsId" INTEGER REFERENCES products(id),
+     "userId" INTEGER REFERENCES users(id),
+     reviews TEXT NOT NULL
     );
 
   `;
