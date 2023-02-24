@@ -3,6 +3,7 @@ const client = require('./client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const SALT_COUNT = 11;
+const {createCart} = require('./Carts');
 
 const JWT = process.env.JWT;
 
@@ -22,7 +23,10 @@ const createUser = async ({
   const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
 
   const response = await client.query(SQL, [ username, hashedPassword, name, email, isAdministrator ]);
-
+  delete response.rows[0].password;
+  const userId = response.rows[0].id
+  const cartId = await createCart(userId);
+  response.rows[0].cartId = cartId
   return response.rows[0];
 };
 
