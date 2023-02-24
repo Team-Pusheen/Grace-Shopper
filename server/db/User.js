@@ -1,5 +1,9 @@
-const client = require("./client");
-const jwt = require("jsonwebtoken");
+
+const client = require('./client');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const SALT_COUNT = 11;
+
 const JWT = process.env.JWT;
 
 const createUser = async ({
@@ -13,13 +17,12 @@ const createUser = async ({
     INSERT INTO users(username, password, name, email, "isAdministrator")
     VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
-  const response = await client.query(SQL, [
-    username,
-    password,
-    name,
-    email,
-    isAdministrator,
-  ]);
+
+
+  const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
+
+  const response = await client.query(SQL, [ username, hashedPassword, name, email, isAdministrator ]);
+
   return response.rows[0];
 };
 

@@ -1,6 +1,13 @@
-const client = require("./client");
-const { getUserByToken, createUser, authenticate } = require("./User");
-const { createProduct } = require("./Products");
+
+const client = require('./client');
+const {
+  getUserByToken,
+  createUser,
+  authenticate
+} = require('./User');
+const {createProduct} = require('./Products')
+const {createCategory} = require('./Categories')
+
 
 const syncTables = async () => {
   const SQL = `
@@ -88,6 +95,7 @@ const syncAndSeed = async () => {
       price: 15,
       stock: 200,
       rarity: 1,
+      category: "weapon"
     }),
     createProduct({
       name: "staff",
@@ -96,11 +104,15 @@ const syncAndSeed = async () => {
       price: 20,
       stock: 200,
       rarity: 1,
-    }),
-  ]);
+
+      category: "weapon"
+    })
+  ])
+
   console.log("--seeded products--");
   console.log(wand);
   console.log(staff);
+
 };
 
 module.exports = {
@@ -109,5 +121,7 @@ module.exports = {
   authenticate,
   getUserByToken,
   createProduct,
-  client,
+
+  createCategory,
+  client
 };
