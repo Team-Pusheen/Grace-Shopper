@@ -5,6 +5,7 @@ const {
   authenticate
 } = require('./User');
 const {createProduct} = require('./Products')
+const {createCategory} = require('./Categories')
 
 const syncTables = async()=> {
   const SQL = `
@@ -92,18 +93,21 @@ const syncAndSeed = async()=> {
       price: 15,
       stock: 200,
       rarity: 1,
+      category: "weapon"
     }),
     createProduct({
       name: "staff",
       description:"A simple wooden staff for novices. Also works as a walking stick",
       price: 20,
       stock: 200,
-      rarity:1
+      rarity: 1,
+      category: "weapon"
     })
   ])
   console.log("--seeded products--");
   console.log(wand);
   console.log(staff);
+
 };
 
 
@@ -113,5 +117,6 @@ module.exports = {
   authenticate,
   getUserByToken,
   createProduct,
+  createCategory,
   client
 };
