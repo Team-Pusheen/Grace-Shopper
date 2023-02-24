@@ -6,6 +6,7 @@ const {
 } = require('./User');
 const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
+const {addProduct} = require ('./CartProducts')
 
 const syncTables = async()=> {
   const SQL = `
@@ -108,6 +109,21 @@ const syncAndSeed = async()=> {
   console.log(wand);
   console.log(staff);
 
+const [item1, item2] = await Promise.all([
+  addProduct({
+    productId: 1,
+    cartId: 1,
+    quantity: 4
+  }),
+  addProduct({
+    productId: 2,
+    cartId: 2,
+    quantity: 3
+  })
+])
+console.log("--seeded cart products--");
+console.log(item1);
+console.log(item2);
 };
 
 
@@ -118,5 +134,6 @@ module.exports = {
   getUserByToken,
   createProduct,
   createCategory,
+  addProduct,
   client
 };
