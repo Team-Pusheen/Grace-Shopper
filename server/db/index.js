@@ -1,12 +1,8 @@
-const client = require('./client');
-const {
-  getUserByToken,
-  createUser,
-  authenticate
-} = require('./User');
-const {createProduct} = require('./Products')
+const client = require("./client");
+const { getUserByToken, createUser, authenticate } = require("./User");
+const { createProduct } = require("./Products");
 
-const syncTables = async()=> {
+const syncTables = async () => {
   const SQL = `
   DROP TABLE IF EXISTS cart_products;
   DROP TABLE IF EXISTS reviews;
@@ -63,25 +59,25 @@ const syncTables = async()=> {
   await client.query(SQL);
 };
 
-const syncAndSeed = async()=> {
+const syncAndSeed = async () => {
   await syncTables();
-  const [moe, lucy]  = await Promise.all([
+  const [moe, lucy] = await Promise.all([
     createUser({
-      username: 'moe',
-      password: 'moe_password',
-      name: 'Moe Problems',
-      email: 'moe.pro@email.com',
-      isAdministrator: false
+      username: "moe",
+      password: "moe_password",
+      name: "Moe Problems",
+      email: "moe.pro@email.com",
+      isAdministrator: false,
     }),
     createUser({
-      username: 'lucy',
-      password: 'lucy_password',
-      name: 'Lucy Lucky',
-      email: 'lucy.lucky@email.com',
-      isAdministrator: true
-    })
+      username: "lucy",
+      password: "lucy_password",
+      name: "Lucy Lucky",
+      email: "lucy.lucky@email.com",
+      isAdministrator: true,
+    }),
   ]);
-  console.log('--- seeded users ---');
+  console.log("--- seeded users ---");
   console.log(moe);
   console.log(lucy);
 
@@ -95,17 +91,17 @@ const syncAndSeed = async()=> {
     }),
     createProduct({
       name: "staff",
-      description:"A simple wooden staff for novices. Also works as a walking stick",
+      description:
+        "A simple wooden staff for novices. Also works as a walking stick",
       price: 20,
       stock: 200,
-      rarity:1
-    })
-  ])
+      rarity: 1,
+    }),
+  ]);
   console.log("--seeded products--");
   console.log(wand);
   console.log(staff);
 };
-
 
 module.exports = {
   syncAndSeed,
@@ -113,5 +109,5 @@ module.exports = {
   authenticate,
   getUserByToken,
   createProduct,
-  client
+  client,
 };
