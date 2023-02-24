@@ -7,6 +7,7 @@ const {
 } = require('./User');
 const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
+const {createReview} = require('./Reviews');
 
 
 const syncTables = async () => {
@@ -113,6 +114,21 @@ const syncAndSeed = async () => {
   console.log(wand);
   console.log(staff);
 
+  const [review1, review2] = await Promise.all([
+    createReview({
+      productsId:1,
+      userId:2,
+      review: "Very well made. Doesn't feel flimsy in my hand. While not powerfull gets the job done."
+    }),
+    createReview({
+      productsId:1,
+      userId:1,
+      review: "Simple but efective."
+    })
+  ])
+  console.log("--Seed Reviews--");
+  console.log(review1);
+  console.log(review2);
 };
 
 module.exports = {
@@ -121,7 +137,7 @@ module.exports = {
   authenticate,
   getUserByToken,
   createProduct,
-
+  createReview,
   createCategory,
   client
 };
