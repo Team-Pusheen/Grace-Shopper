@@ -117,12 +117,12 @@ const syncAndSeed = async () => {
 
 const [item1, item2] = await Promise.all([
   addProduct({
-    productId: 1,
+    productsId: 1,
     cartId: 1,
     quantity: 4
   }),
   addProduct({
-    productId: 2,
+    productsId: 2,
     cartId: 2,
     quantity: 3
   })
