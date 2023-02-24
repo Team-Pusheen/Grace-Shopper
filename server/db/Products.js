@@ -1,3 +1,4 @@
+
 const client = require('./client');
 const jwt = require('jsonwebtoken');
 const { createCategory } = require('./Categories');
@@ -14,10 +15,11 @@ const createProduct = async({name, description, price, stock, rarity, imageURL, 
   const productsId = response.rows[0].id;
   const categories = await createCategory({productsId, category});
   response.rows[0].categories = categories;
+
   return response.rows[0];
-}
+};
 
 
 module.exports = {
-    createProduct
-  };
+  createProduct,
+};

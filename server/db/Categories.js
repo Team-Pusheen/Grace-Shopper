@@ -1,6 +1,7 @@
-const client = require('./client');
-const jwt = require('jsonwebtoken');
+const client = require("./client");
+const jwt = require("jsonwebtoken");
 const JWT = process.env.JWT;
+
 
 const createCategory = async({productsId, category}) => 
 {
@@ -17,3 +18,4 @@ const createCategory = async({productsId, category}) =>
 module.exports ={
 createCategory
 };
+
