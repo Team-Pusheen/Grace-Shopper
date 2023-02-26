@@ -90,7 +90,7 @@ const syncAndSeed = async () => {
   console.log(moe);
   console.log(lucy);
 
-  const [wand, staff] = await Promise.all([
+  const [wand, staff, bagOfHolding] = await Promise.all([
     createProduct({
       name: "wand",
       description: "A wooden practice wand for novices.",
@@ -106,7 +106,42 @@ const syncAndSeed = async () => {
       price: 20,
       stock: 200,
       rarity: 1,
-
+      category: "weapon"
+    }),
+    createProduct({
+      name: "Bag of Holding",
+      description:"A bag that is bigger on the inside. Holds up to 500lbs and has a volume of 64 cubic feet. Warning: do not put inside of another bag of holding or a portable hole.",
+      price: 500,
+      stock: 150,
+      rarity: 3,
+      imageURL: "https://www.dndbeyond.com/avatars/thumbnails/7/120/1000/1000/636284708068284913.jpeg",
+      category: "tool"
+    }),
+    createProduct({
+      name:"Immovable Rod",
+      description: "A rod that when activated will not move from the spot it was placed.",
+      price:650,
+      stock:230,
+      rarity:3,
+      imageURL:"https://www.dndbeyond.com/avatars/thumbnails/7/261/1000/1000/636284741670235041.jpeg",
+      category:"tool"
+    }),
+    createProduct({
+      name:"Vorpal Sword",
+      description:"A powerful magic sword that can snicker-snack a head off a monster with ease.",
+      price: 2000000,
+      stock:2,
+      rarity:5,
+      imageURL: "https://www.dndbeyond.com/avatars/thumbnails/7/462/1000/1000/636284780691337497.jpeg",
+      category: "weapon"
+    }),
+    createProduct({
+      name:"Rebellion Replica",
+      description: "A replica of a sword weilded by a demon hunter. While not as powerful as the origional it still packs a punch.",
+      price:560,
+      stock:602,
+      rarity:2,
+      imageURL: "https://static.wikia.nocookie.net/devilmaycry/images/9/91/Rebellion_DMC5.png/revision/latest?cb=20181028035650",
       category: "weapon"
     })
   ])
@@ -114,6 +149,7 @@ const syncAndSeed = async () => {
   console.log("--seeded products--");
   console.log(wand);
   console.log(staff);
+  console.log(bagOfHolding);
 
 const [item1, item2, item3] = await Promise.all([
   addProduct({
