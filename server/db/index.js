@@ -128,7 +128,7 @@ const [item1, item2, item3] = await Promise.all([
   }),
   addProduct({
     productsId:1,
-    cartId:1,
+    cartId:2,
     quantity:3
   })
 ])
@@ -156,6 +156,8 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
+
+
 };
 
 module.exports = {

@@ -2,9 +2,10 @@ const client = require('./client');
 
 const addProduct = async ({productsId, cartId, quantity}) => {
    
-   const exits = await productExitsCheck({cartId, productsId});
-   if(!exits)
+    const exists = await productExitsCheck({productsId:productsId, cartId:cartId})
+   if(!exists)
    {
+   
     const SQL = `
     INSERT INTO cart_products("productsId", "cartId", quantity)
     VALUES ($1, $2, $3)
@@ -15,11 +16,9 @@ const addProduct = async ({productsId, cartId, quantity}) => {
     return response.rows[0];
    }
    else{
-    console.log("item alredy exitst");
-    quantity.quantity =exits +quantity;
-    await changeQuantity({cartId, productsId, quantity});
+    const newAmount = await changeQuantity({productsId:productsId, cartId:cartId, quantity:quantity});
+    return newAmount;
    }
-    
 }
 
 const emptyCart = async ({cartId}) =>{
@@ -72,6 +71,7 @@ const changeQuantity = async({cartId, productsId, quantity}) =>
     }
 }
 
+//Ask the instructers about
 const productExitsCheck = async ({cartId, productsId}) =>{
     const SQL =`
         SELECT * FROM cart_products
@@ -79,10 +79,10 @@ const productExitsCheck = async ({cartId, productsId}) =>{
         AND "productsId" = $2
     ;`
     const {rows} = await client.query(SQL,[cartId, productsId]);
-    console.log(rows);
-    if(rows.length>0)
+    
+    if(rows.length >0)
     {
-        console.log(rows[0].quantity);
+        console.log(rows[0]);
         return rows[0].quantity;
     }
     else{
@@ -95,5 +95,6 @@ module.exports = {
     addProduct,
     emptyCart,
     removeItem,
-    changeQuantity
+    changeQuantity,
+    productExitsCheck
 };
