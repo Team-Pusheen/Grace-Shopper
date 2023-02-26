@@ -8,7 +8,7 @@ const {
 const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
-const {createReview} = require('./Reviews');
+const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
 
 
 const syncTables = async () => {
@@ -146,7 +146,7 @@ console.log(item3);
     createReview({
       productsId:1,
       userId:1,
-      review: "Simple but efective."
+      review: "Simple but effective."
     })
   ])
   console.log("--Seed Reviews--");
@@ -156,7 +156,6 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
-
 
 };
 
@@ -172,5 +171,7 @@ module.exports = {
   emptyCart,
   removeItem,
   changeQuantity,
+  getReviewsByProductId,
+  getReviewsByUserId,
   client
 };
