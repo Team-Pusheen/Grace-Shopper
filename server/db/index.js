@@ -7,7 +7,7 @@ const {
 } = require('./User');
 const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
-const {addProduct} = require ('./CartProducts')
+const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview} = require('./Reviews');
 
 
@@ -115,7 +115,7 @@ const syncAndSeed = async () => {
   console.log(wand);
   console.log(staff);
 
-const [item1, item2] = await Promise.all([
+const [item1, item2, item3] = await Promise.all([
   addProduct({
     productsId: 1,
     cartId: 1,
@@ -125,11 +125,17 @@ const [item1, item2] = await Promise.all([
     productsId: 2,
     cartId: 2,
     quantity: 3
+  }),
+  addProduct({
+    productsId:1,
+    cartId:2,
+    quantity:3
   })
 ])
 console.log("--seeded cart products--");
 console.log(item1);
 console.log(item2);
+console.log(item3);
 
   const [review1, review2] = await Promise.all([
     createReview({
@@ -147,6 +153,11 @@ console.log(item2);
   console.log(review1);
   console.log(review2);
 
+ const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
+ console.log("--New Amount--");
+ console.log(newAmount);
+
+
 };
 
 module.exports = {
@@ -158,5 +169,8 @@ module.exports = {
   createReview,
   createCategory,
   addProduct,
+  emptyCart,
+  removeItem,
+  changeQuantity,
   client
 };
