@@ -5,7 +5,7 @@ const addProduct = async ({productsId, cartId, quantity}) => {
     const SQL = `
     INSERT INTO cart_products("productsId", "cartId", quantity)
     VALUES ($1, $2, $3)
-    ON CONFLICT ("productsId", "cartId") DO UPDATE SET quantity = quantity + $3
+    ON CONFLICT ("productsId", "cartId") DO UPDATE SET quantity = EXCLUDED.quantity + $3
     RETURNING *
     ;`
 
