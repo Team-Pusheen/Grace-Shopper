@@ -3,7 +3,8 @@ const client = require('./client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const SALT_COUNT = 11;
-const {createCart} = require('./Carts');
+const {createCart, getUserCart} = require('./Carts');
+
 
 const JWT = process.env.JWT;
 
@@ -64,8 +65,42 @@ const authenticate = async ({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT);
 };
 
+async function getUser({ username, password }) {
+  try{
+    const user = await getUserByUsername(username)
+    const hashedPassword = user.password;
+    const isValid = await bcrypt.compare(password, hashedPassword)
+  if(isValid){
+  delete user.password;
+  return user;
+  }
+}
+catch(error){
+  throw error;
+}
+}
+
+async function getUserById({userId}) {
+ try {
+  const {rows} = await client.query(`
+   SELECT id, username 
+   FROM users
+   WHERE id = $1
+  `,[userId] );
+  const cart = await getUserCart({userId});
+  rows[0].cart = cart;
+  delete rows[0].password;
+  return rows[0];
+
+ }catch(error){
+  throw error;
+ }
+}
+
 module.exports = {
   createUser,
   authenticate,
   getUserByToken,
+  getUser,
+  getUserById
 };

@@ -10,4 +10,16 @@ const createCart = async ({userId}) => {
         return rows[0].id;
 }
 
-module.exports={createCart}
+async function getUserCart ({userId}) {
+    const SQL = `
+        SELECT id FROM carts
+        WHERE "userId" = $1
+    ;`
+    const {rows:[id]} = await client.query(SQL, [userId]);
+    
+    const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = $1;`,[id]);
+    return rows;
+
+}
+
+module.exports={createCart, getUserCart}
