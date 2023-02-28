@@ -14,14 +14,15 @@ router.post('/:productsId/:userId', async(req, res, next) =>
         if(auth)
         {
             const token = auth.slice(prefix.length);
-            const user = jwt.verif(token, JWT);
+            const user = jwt.verify(token, JWT);
             
-            const {productsId, userId} = req.body;
+            const {productsId, userId} = req.params;
 
-            const newReview = await createReview({productsId, userId});
+            const newReview = await createReview({productsId:productsId, userId:userId});
             res.send(newReview);
         }
         else{
+            
             next({
                 name:"NeedToLogin",
                 message:"To write a review please login."
