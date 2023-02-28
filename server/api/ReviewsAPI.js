@@ -1,4 +1,4 @@
-/*const express = require("express");
+const express = require("express");
 const router = express.Router();
 const {createReview} = require("../db")
 const jwt = require('jsonwebtoken')
@@ -32,4 +32,6 @@ router.post('/:productsId/:userId', async(req, res, next) =>
     }
     
 })
-*/
+
+
+module.exports = router;
