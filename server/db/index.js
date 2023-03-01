@@ -48,7 +48,8 @@ const syncTables = async () => {
     id SERIAL PRIMARY KEY,
     "productsId" INTEGER REFERENCES products(id),
     "cartId" INTEGER REFERENCES carts(id),
-    quantity INTEGER NOT NULL
+    quantity INTEGER NOT NULL,
+    UNIQUE ("productsId", "cartId")
   );
 
   CREATE TABLE categories(
@@ -163,9 +164,9 @@ const [item1, item2, item3] = await Promise.all([
     quantity: 3
   }),
   addProduct({
-    productsId:1,
+    productsId:2,
     cartId:2,
-    quantity:3
+    quantity:4
   })
 ])
 console.log("--seeded cart products--");

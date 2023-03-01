@@ -54,7 +54,11 @@ const authenticate = async ({ username, password }) => {
     FROM users
     WHERE username = $1 and password = $2
   `;
-  const response = await client.query(SQL, [username, password]);
+
+  const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
+
+
+  const response = await client.query(SQL, [username, hashedPassword]);
   console.log(response);
   if (!response.rows.length) {
     const error = Error("not authorized");
