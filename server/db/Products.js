@@ -52,22 +52,28 @@ return response;
 };
 
 // GET PRODUCTS BY CATEGORY -> GET /api/products/:category
-async function getProductsByCategory({productsId}) {
+async function getProductsByCategory(category) {
   try {
-      const SQL =`
+      const { rows } = await client.query(`
       SELECT *
       from categories
-      WHERE "productsId" = $1
-      ;`
-
-      const { rows } = await client.query(SQL,[productsId])
+      JOIN products ON categories."productsId" = products.id
+      WHERE category = $1;
+      `, [category]);
       const response = await attachReviews(rows);
-
-      return response;
+      return response
+    //   const productArray = await getAllProducts() 
+    //   
+    //   const finalCategory = response.map(async (product) => {
+    //  if (category === product.categories) {
+    //   product.categories = category;
+    //  } 
+    // })
+    //   return await Promise.all(finalCategory);
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function attachReviews(productArray) {
   try {    
@@ -84,8 +90,7 @@ async function attachReviews(productArray) {
   } catch (error) {
     throw error;
   }
-}
-
+};
 
 
 module.exports = {

@@ -12,6 +12,7 @@ const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Rev
 const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
 const {getUserCart} = require("./Carts")
 
+
 const syncTables = async () => {
   const SQL = `
   DROP TABLE IF EXISTS cart_products;
@@ -194,13 +195,18 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
-  const allProducts = await getProductsByCategory({category:"tool"})
-  console.log("-- all products --")
-  console.log(allProducts)
+
+ const allProducts = await getAllProducts()
+ console.log("-- all products --")
+ console.log(allProducts)
+ console.log("---all categories---");
+ console.log(await getProductsByCategory("tool"))
+
 
   const getCart = await getUserCart({userId:1});
   console.log("--user cart by id--");
   console.log(getCart);
+
 };
 
 
