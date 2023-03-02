@@ -52,7 +52,7 @@ return response;
 };
 
 // GET PRODUCTS BY CATEGORY -> GET /api/products/:category
-async function getProductsByCategory(category) {
+async function getProductsByCategory({category}) {
   try {
       const { rows } = await client.query(`
       SELECT *
