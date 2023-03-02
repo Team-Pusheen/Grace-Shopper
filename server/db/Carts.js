@@ -10,7 +10,7 @@ const createCart = async ({userId}) => {
         return rows[0].id;
 }
 
-async function getUserCart ({userId}) {
+const getUserCart = async ({userId}) => {
     const SQL = `
         SELECT id FROM carts
         WHERE "userId" = $1
