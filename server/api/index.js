@@ -13,6 +13,14 @@ router.use("/reviews",reviewsRouter);
 const cartProductsRouter = require("./CartProductsAPI");
 router.use("/cartProducts",cartProductsRouter);
 
+//router for products
+const productsRouter = require("./ProductsAPI");
+router.use("/products", productsRouter);
+
+//router for users
+const usersRouter = require("./UsersAPI");
+router.use("/users",usersRouter);
+
 //custom error handling
 router.use((error, req, res, next) =>{
     res.send({

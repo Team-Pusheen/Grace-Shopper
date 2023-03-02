@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
+import Products from './Products';
+import {getProducts} from "../fetchFunctions"
+
 import { Link, Routes, Route } from 'react-router-dom';
 
 
 const App = ()=> {
   const [auth, setAuth] = useState({});
+  const [products, setProducts] =useState([]);
+
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -25,6 +30,12 @@ const App = ()=> {
 
   useEffect(()=> {
     attemptLogin();
+    const grabProducts = async() =>
+    {
+      const allProducts = await getProducts()
+      setProducts(allProducts);
+    }
+    grabProducts();
   }, []);
 
   const logout = ()=> {
@@ -57,7 +68,7 @@ const App = ()=> {
 
   return (
     <div>
-      <h1>FS UNI App Template</h1>
+      <h1>Pusheen Bazaar</h1>
       <nav>
         {
           auth.id ? (
@@ -71,6 +82,7 @@ const App = ()=> {
             </>
           )
         }
+        <Link to ='/products'>Products</Link>
       </nav>
       <Routes>
         {
@@ -85,6 +97,7 @@ const App = ()=> {
             </>
           )
         }
+        <Route path= '/products' element={<Products products={products}/> }/>
       </Routes>
     </div>
   );
