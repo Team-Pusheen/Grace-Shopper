@@ -19,7 +19,38 @@ const createProduct = async({name, description, price, stock, rarity, imageURL, 
   return response.rows[0];
 };
 
+const deleteProduct = async({id}) => {
+  try {
+    const { rows:cart_products } = await client.query(`
+    DELETE FROM cart_products
+    WHERE  "productsId" = $1
+    `, [id])
+    
+    const { rows:reviews } = await client.query(`
+    DELETE FROM reviews
+    WHERE "productsId" = $1
+    `, [id])
+
+    const { rows:categories } = await client.query(`
+    DELETE FROM categories
+    WHERE "productsId" = $1
+    `, [id])
+
+    const { rows } = await client.query(`
+    DELETE FROM products
+      WHERE id = $1
+      RETURNING *
+       ;`, [id])
+
+return rows;
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
 
 module.exports = {
   createProduct,
+  deleteProduct
 };
