@@ -9,6 +9,8 @@ const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
+const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
+const {getUserCart} = require("./Carts")
 
 
 const syncTables = async () => {
@@ -48,7 +50,8 @@ const syncTables = async () => {
     id SERIAL PRIMARY KEY,
     "productsId" INTEGER REFERENCES products(id),
     "cartId" INTEGER REFERENCES carts(id),
-    quantity INTEGER NOT NULL
+    quantity INTEGER NOT NULL,
+    UNIQUE ("productsId", "cartId")
   );
 
   CREATE TABLE categories(
@@ -163,9 +166,9 @@ const [item1, item2, item3] = await Promise.all([
     quantity: 3
   }),
   addProduct({
-    productsId:1,
+    productsId:2,
     cartId:2,
-    quantity:3
+    quantity:4
   })
 ])
 console.log("--seeded cart products--");
@@ -192,11 +195,27 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
+
   
  const deleteIt = await deleteProduct({id: 1})
  console.log('--Delete Product--');
  console.log(deleteIt);
+
+
+ const allProducts = await getAllProducts()
+ console.log("-- all products --")
+ console.log(allProducts)
+ console.log("---all categories---");
+ console.log(await getProductsByCategory({category:"tool"}))
+
+
+  const getCart = await getUserCart({userId:1});
+  console.log("--user cart by id--");
+  console.log(getCart);
+
+
 };
+
 
 module.exports = {
   syncAndSeed,
@@ -212,6 +231,8 @@ module.exports = {
   removeItem,
   changeQuantity,
   getReviewsByProductId,
+  getProductsByCategory,
   getReviewsByUserId,
+  getAllProducts,
   client
 };
