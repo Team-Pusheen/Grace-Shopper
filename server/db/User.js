@@ -26,7 +26,7 @@ const createUser = async ({
   const response = await client.query(SQL, [ username, hashedPassword, name, email, isAdministrator ]);
   delete response.rows[0].password;
   const userId = response.rows[0].id
-  const cartId = await createCart(userId);
+  const cartId = await createCart({userId:userId});
   response.rows[0].cartId = cartId
   return response.rows[0];
 };
