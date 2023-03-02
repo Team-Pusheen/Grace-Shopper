@@ -20,7 +20,7 @@ router.get('/category/:category', async(req, res, next) =>
 {
     try{
         const {category} = req.params;
-
+        console.log(category);
         const products = await getProductsByCategory({category:category});
         res.send(products);
     }catch(error)

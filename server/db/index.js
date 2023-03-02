@@ -199,7 +199,7 @@ console.log(item3);
  console.log(allProducts)
  
  console.log("---all categories---");
- console.log(await getProductsByCategory("tool"))
+ console.log(await getProductsByCategory({category:"tool"}))
 
 
   const getCart = await getUserCart({userId:1});
