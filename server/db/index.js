@@ -5,7 +5,7 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const {createProduct} = require('./Products')
+const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
@@ -194,6 +194,13 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
+
+  
+ const deleteIt = await deleteProduct({id: 1})
+ console.log('--Delete Product--');
+ console.log(deleteIt);
+
+
  const allProducts = await getAllProducts()
  console.log("-- all products --")
  console.log(allProducts)
@@ -206,6 +213,7 @@ console.log(item3);
   console.log("--user cart by id--");
   console.log(getCart);
 
+
 };
 
 
@@ -216,6 +224,7 @@ module.exports = {
   getUserByToken,
   createProduct,
   createReview,
+  deleteProduct,
   createCategory,
   addProduct,
   emptyCart,
