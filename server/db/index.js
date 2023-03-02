@@ -9,7 +9,7 @@ const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
-const {attachReviews, getAllProducts} = require('./Products')
+const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
 
 
 const syncTables = async () => {
@@ -194,9 +194,11 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
-  const allProducts = await getAllProducts()
-  console.log("-- all products --")
-  console.log(allProducts)
+ const allProducts = await getAllProducts()
+ console.log("-- all products --")
+ console.log(allProducts)
+ console.log("---all categories---");
+ console.log(await getProductsByCategory("tool"))
 };
 
 
