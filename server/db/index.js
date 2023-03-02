@@ -9,8 +9,8 @@ const {createProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
-const {attachReviews, getAllProducts} = require('./Products')
-
+const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
+const {getUserCart} = require("./Carts")
 
 const syncTables = async () => {
   const SQL = `
@@ -194,9 +194,13 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
-  const allProducts = await getAllProducts()
+  const allProducts = await getProductsByCategory({category:"tool"})
   console.log("-- all products --")
   console.log(allProducts)
+
+  const getCart = await getUserCart({userId:1});
+  console.log("--user cart by id--");
+  console.log(getCart);
 };
 
 
@@ -213,6 +217,7 @@ module.exports = {
   removeItem,
   changeQuantity,
   getReviewsByProductId,
+  getProductsByCategory,
   getReviewsByUserId,
   getAllProducts,
   client
