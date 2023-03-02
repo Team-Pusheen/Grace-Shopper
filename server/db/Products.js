@@ -20,6 +20,36 @@ const createProduct = async({name, description, price, stock, rarity, imageURL, 
   return response.rows[0];
 };
 
+const deleteProduct = async({id}) => {
+  try {
+    const { rows:cart_products } = await client.query(`
+    DELETE FROM cart_products
+    WHERE  "productsId" = $1
+    `, [id])
+    
+    const { rows:reviews } = await client.query(`
+    DELETE FROM reviews
+    WHERE "productsId" = $1
+    `, [id])
+
+    const { rows:categories } = await client.query(`
+    DELETE FROM categories
+    WHERE "productsId" = $1
+    `, [id])
+
+    const { rows } = await client.query(`
+    DELETE FROM products
+      WHERE id = $1
+      RETURNING *
+       ;`, [id])
+
+return rows;
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
 
 
 // GET ALL PRODUCTS -> GET /api/products
@@ -52,22 +82,28 @@ return response;
 };
 
 // GET PRODUCTS BY CATEGORY -> GET /api/products/:category
-async function getProductsByCategory({productsId}) {
+async function getProductsByCategory({category}) {
   try {
-      const SQL =`
+      const { rows } = await client.query(`
       SELECT *
       from categories
-      WHERE "productsId" = $1
-      ;`
-
-      const { rows } = await client.query(SQL,[productsId])
+      JOIN products ON categories."productsId" = products.id
+      WHERE category = $1;
+      `, [category]);
       const response = await attachReviews(rows);
-
-      return response;
+      return response
+    //   const productArray = await getAllProducts() 
+    //   
+    //   const finalCategory = response.map(async (product) => {
+    //  if (category === product.categories) {
+    //   product.categories = category;
+    //  } 
+    // })
+    //   return await Promise.all(finalCategory);
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function attachReviews(productArray) {
   try {    
@@ -84,12 +120,12 @@ async function attachReviews(productArray) {
   } catch (error) {
     throw error;
   }
-}
-
+};
 
 
 module.exports = {
   createProduct,
+  deleteProduct,
   getAllProducts,
   getProductById,
   getProductsByCategory,

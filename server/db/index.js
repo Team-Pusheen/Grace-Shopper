@@ -5,12 +5,14 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const {createProduct} = require('./Products')
+const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
-const {attachReviews, getAllProducts} = require('./Products')
-const {getUserById} = require('./User')
+
+const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
+const {getUserCart} = require("./Carts")
+
 
 
 const syncTables = async () => {
@@ -195,13 +197,27 @@ console.log(item3);
  const newAmount = await changeQuantity({cartId:1, productsId:1, quantity:8});
  console.log("--New Amount--");
  console.log(newAmount);
-  const allProducts = await getAllProducts()
-  console.log("-- all products --")
-  console.log(allProducts)
 
-  const user = await getUserById({userId:1})
-  console.log("-- user by id  --")
-  console.log(user)
+
+  
+ const deleteIt = await deleteProduct({id: 1})
+ console.log('--Delete Product--');
+ console.log(deleteIt);
+
+
+ const allProducts = await getAllProducts()
+ console.log("-- all products --")
+ console.log(allProducts)
+ console.log("---all categories---");
+ console.log(await getProductsByCategory({category:"tool"}))
+
+
+  const getCart = await getUserCart({userId:1});
+  console.log("--user cart by id--");
+  console.log(getCart);
+
+
+
 };
 
 
@@ -212,12 +228,14 @@ module.exports = {
   getUserByToken,
   createProduct,
   createReview,
+  deleteProduct,
   createCategory,
   addProduct,
   emptyCart,
   removeItem,
   changeQuantity,
   getReviewsByProductId,
+  getProductsByCategory,
   getReviewsByUserId,
   getAllProducts,
   client,
