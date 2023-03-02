@@ -200,10 +200,12 @@ console.log(item3);
  
  console.log("---all categories---");
  console.log(await getProductsByCategory("tool"))
- 
- const getCart = await getUserCart({userId:1});
- console.log("--user cart by id--");
- console.log(getCart);
+
+
+  const getCart = await getUserCart({userId:1});
+  console.log("--user cart by id--");
+  console.log(getCart);
+
 };
 
 
