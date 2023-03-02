@@ -62,14 +62,7 @@ async function getProductsByCategory({category}) {
       `, [category]);
       const response = await attachReviews(rows);
       return response
-    //   const productArray = await getAllProducts() 
-    //   
-    //   const finalCategory = response.map(async (product) => {
-    //  if (category === product.categories) {
-    //   product.categories = category;
-    //  } 
-    // })
-    //   return await Promise.all(finalCategory);
+    
   } catch (error) {
     throw error;
   }

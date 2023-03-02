@@ -20,7 +20,7 @@ async function getUserCart ({userId}) {
     
     console.log(id);
     const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = id;`);
-    //console.log(rows);
+    
     return rows;
 
 }
