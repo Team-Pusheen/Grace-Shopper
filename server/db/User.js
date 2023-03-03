@@ -2,10 +2,9 @@
 const client = require('./client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const SALT_COUNT = 11;
 const {createCart, getUserCart} = require('./Carts');
-
-
+//require("dotenv").config();
+const SALT_COUNT = 11;//process.env.SALT_COUNT;
 const JWT = process.env.JWT;
 
 const createUser = async ({
@@ -20,10 +19,9 @@ const createUser = async ({
     VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
 
+  //const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
 
-  const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
-
-  const response = await client.query(SQL, [ username, hashedPassword, name, email, isAdministrator ]);
+  const response = await client.query(SQL, [ username, password, name, email, isAdministrator ]);
   delete response.rows[0].password;
   const userId = response.rows[0].id
   const cartId = await createCart({userId:userId});
@@ -56,10 +54,10 @@ const authenticate = async ({ username, password }) => {
     WHERE username = $1 and password = $2
   `;
 
-  const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
+  //const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
 
 
-  const response = await client.query(SQL, [username, hashedPassword]);
+  const response = await client.query(SQL, [username, password]);
   console.log(response);
   if (!response.rows.length) {
     const error = Error("not authorized");
