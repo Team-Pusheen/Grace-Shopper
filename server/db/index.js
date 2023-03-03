@@ -239,5 +239,5 @@ module.exports = {
   getReviewsByUserId,
   getAllProducts,
   client,
-  getUserById
+  
 };
