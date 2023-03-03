@@ -8,25 +8,24 @@ const JWT = process.env.JWT;
 router.post('/register', async(req, res, next) =>
 {   
     const {username,password,name,email,isAdministrator} =req.body;
-
     try{
 
-        const userExists = await getUserByUsername({username});
+        //const userExists = await getUserByUsername({username});
 
-        if(!userExists)
-        {
+        //if(!userExists)
+        //{
             const newUser = await createUser({username:username, password:password,name:name, email:email, isAdministrator:isAdministrator});
             res.send({
                 message: `Welcome ${username} to the Pusheen Baazar.`,
                 user:newUser
             });
-        }
-        else{
-            next({
-                name:"UserExistsError",
-                message: `Username ${username} is alredy taken.`
-            })
-        }
+        //}
+        //else{
+        //    next({
+              //  name:"UserExistsError",
+              //  message: `Username ${username} is alredy taken.`
+          //  })
+       // }
 
         
     }catch(error){
