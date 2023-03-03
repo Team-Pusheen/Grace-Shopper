@@ -5,9 +5,9 @@ import { Link, useParams } from 'react-router-dom';
 
 
 
-const ViewProduct = ({products}) => {
+const SingleView = ({products}) => {
     console.log()
-    const [products, setProducts] = useState([]);
+    //const [products, setProducts] = useState([]);
 
     const {productId} = useParams();
     const product = products.find(product => product.id === id*1);

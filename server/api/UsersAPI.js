@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const JWT = process.env.JWT;
 
 //create a user
-route.post('/register', async(req, res, next) =>
+router.post('/register', async(req, res, next) =>
 {   
     const {username,password,name,email,isAdministrator} =req.body;
 
