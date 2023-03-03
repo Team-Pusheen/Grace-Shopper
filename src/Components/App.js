@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Products from './Products';
+import Register from './Register';
 import {getProducts} from "../fetchFunctions"
-
+import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
 
 
