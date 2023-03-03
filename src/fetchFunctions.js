@@ -7,3 +7,10 @@ export const getProducts = (async() =>{
         return result;
     })
 })
+
+export const register= (async() =>
+{
+    return fetch('api/users/register', {
+        method: "POST",
+    })
+})
