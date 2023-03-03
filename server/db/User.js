@@ -99,10 +99,28 @@ async function getUserById({userId}) {
  }
 }
 
+const getUserByUsername = async({username})=>
+{
+  try{
+    const SQL =`
+    SELECt username
+    FROM users
+    WHERE username =$1
+    ;`
+
+    const {rows} = client.query(SQL,[username]);
+    return rows[0].username;
+  }catch(error)
+  {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   authenticate,
   getUserByToken,
   getUser,
-  getUserById
+  getUserById,
+  getUserByUsername
 };

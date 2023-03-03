@@ -1,8 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const {} = require("../db")
+const {createUser, getUserByUsername} = require("../db/User")
 const jwt = require('jsonwebtoken')
 const JWT = process.env.JWT;
+
+//create a user
+route.post('/register', async(req, res, next) =>
+{   
+    const {username,password,name,email,isAdministrator} =req.body;
+
+    try{
+
+        const userExists = await getUserByUsername({username});
+
+        if(!userExists)
+        {
+            const newUser = await createUser({username:username, password:password,name:name, email:email, isAdministrator:isAdministrator});
+            res.send({
+                message: `Welcome ${username} to the Pusheen Baazar.`,
+                user:newUser
+            });
+        }
+        else{
+            next({
+                name:"UserExistsError",
+                message: `Username ${username} is alredy taken.`
+            })
+        }
+
+        
+    }catch(error){
+        next(error);
+    }
+})
+
 
 
 module.exports = router;
