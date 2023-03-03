@@ -86,10 +86,31 @@ async function attachReviews(productArray) {
 };
 
 
+//change the stock of a product
+const changeStockOfProduct = async ({productsId, stock}) =>
+{
+  try{
+    const SQL =`
+    UPDATE products
+    SET stock =$2
+    WHERE id = $1
+    RETURNING *
+    ;`
+    const {rows} = client.query(SQL, [productsId, stock]);
+    return rows[0];
+
+  }catch(error)
+  {
+    throw error;
+  }
+}
+
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   getProductsByCategory,
-  attachReviews
+  attachReviews,
+  changeStockOfProduct
 };
