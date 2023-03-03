@@ -92,14 +92,7 @@ async function getProductsByCategory({category}) {
       `, [category]);
       const response = await attachReviews(rows);
       return response
-    //   const productArray = await getAllProducts() 
-    //   
-    //   const finalCategory = response.map(async (product) => {
-    //  if (category === product.categories) {
-    //   product.categories = category;
-    //  } 
-    // })
-    //   return await Promise.all(finalCategory);
+    
   } catch (error) {
     throw error;
   }
@@ -123,11 +116,32 @@ async function attachReviews(productArray) {
 };
 
 
+//change the stock of a product
+const changeStockOfProduct = async ({productsId, stock}) =>
+{
+  try{
+    const SQL =`
+    UPDATE products
+    SET stock =$2
+    WHERE id = $1
+    RETURNING *
+    ;`
+    const {rows} = client.query(SQL, [productsId, stock]);
+    return rows[0];
+
+  }catch(error)
+  {
+    throw error;
+  }
+}
+
+
 module.exports = {
   createProduct,
   deleteProduct,
   getAllProducts,
   getProductById,
   getProductsByCategory,
-  attachReviews
+  attachReviews,
+  changeStockOfProduct
 };

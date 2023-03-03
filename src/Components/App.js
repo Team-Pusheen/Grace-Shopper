@@ -78,7 +78,12 @@ const App = ()=> {
             </>
           ) : (
             <>
+            <>
               <Link to='/login'>Login</Link>
+            </>
+            <>
+              <Link to ='/register'>Sign Up</Link>
+            </>
             </>
           )
         }
@@ -93,7 +98,12 @@ const App = ()=> {
 
           ): (
             <>
-            <Route path='/login' element= { <Login login={ login }/> } />
+              <>
+              <Route path='/login' element= { <Login login={ login }/> } />
+              </>
+              <>
+              <Route path='/register' element ={<Register />}/>
+              </>
             </>
           )
         }

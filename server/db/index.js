@@ -90,6 +90,13 @@ const syncAndSeed = async () => {
       email: "lucy.lucky@email.com",
       isAdministrator: true,
     }),
+    createUser({
+      username: "Admin_Tyler",
+      password: "AdminT",
+      name: "Tyler",
+      email:"tyler.admin@pusheen.com",
+      isAdministrator: true,
+    })
   ]);
   console.log("--- seeded users ---");
   console.log(moe);
