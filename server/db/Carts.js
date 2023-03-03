@@ -2,7 +2,7 @@ const client = require('./client');
 
 const createCart = async ({userId}) => {
     const SQL = `
-        INSERT INTO carts("userId")
+        INSERT INTO carts ("userId")
         VALUES ($1)
         RETURNING *
     ;`
@@ -20,6 +20,7 @@ async function getUserCart ({userId}) {
     
     const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = id;`);
     
+
     return rows;
 
 }

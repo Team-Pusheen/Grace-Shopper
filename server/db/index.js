@@ -9,8 +9,10 @@ const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
+
 const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
 const {getUserCart} = require("./Carts")
+
 
 
 const syncTables = async () => {
@@ -203,6 +205,7 @@ console.log(item3);
  console.log("--New Amount--");
  console.log(newAmount);
 
+
   
  const deleteIt = await deleteProduct({id: 1})
  console.log('--Delete Product--');
@@ -219,6 +222,7 @@ console.log(item3);
   const getCart = await getUserCart({userId:1});
   console.log("--user cart by id--");
   console.log(getCart);
+
 
 
 };
@@ -241,5 +245,6 @@ module.exports = {
   getProductsByCategory,
   getReviewsByUserId,
   getAllProducts,
-  client
+  client,
+  
 };

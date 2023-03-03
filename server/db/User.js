@@ -84,12 +84,15 @@ catch(error){
 
 async function getUserById({userId}) {
  try {
-  const {rows} = await client.query(`
+  const {rows} = await client.query(
+    `
    SELECT id, username 
    FROM users
    WHERE id = $1
   `,[userId] );
+  
   const cart = await getUserCart({userId});
+  console.log(cart);
   rows[0].cart = cart;
   delete rows[0].password;
   return rows[0];

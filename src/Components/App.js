@@ -108,6 +108,7 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
+        <Route path= '/products/:productsId' element={<SingleView/>}/>
       </Routes>
     </div>
   );
