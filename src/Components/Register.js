@@ -7,11 +7,12 @@ const Register =() =>
     const [password, setPassword] = useState("");
     const [name, setName] =useState("");
     const [email, setEmail] =useState("");
-    
+    const [result, setResult] = useState({});
     const goRegister = async(ev) =>
     {
         ev.preventDefault();
-        const result = await register(username, password, name, email);
+        const user = await register(username, password, name, email);
+        setResult(user);
         setUsername("");
         setEmail("");
         setPassword("");
@@ -31,6 +32,9 @@ const Register =() =>
             <input placeholder="Password" value={password} type="password" onChange={ev => setPassword(ev.target.value)}></input>
             <button>Submit</button>
         </form>
+        <div>
+            {result.name == "UserExistsError" || result.name =="Welcome" ? <p>{result.message}</p> :null}
+        </div>
     </div>
 }
 

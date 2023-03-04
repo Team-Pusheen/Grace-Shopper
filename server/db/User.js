@@ -104,19 +104,20 @@ async function getUserById({userId}) {
 
 const getUserByUsername = async({username})=>
 {
+  
   try{
     const SQL =`
-    SELECt username
+    SELECt *
     FROM users
     WHERE username =$1
     ;`
 
-    const {rows} = client.query(SQL,[username]);
-    return rows[0].username;
+    const {rows} = await client.query(SQL,[username]);
+    return rows[0];
   }catch(error)
-  {
+ {
     throw error;
-  }
+ }
 }
 
 module.exports = {
