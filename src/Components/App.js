@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts} from "../fetchFunctions"
+import {getProducts, grabUserCart, getMeByToken} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
 
@@ -14,8 +14,9 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
-  const attemptLogin = ()=> {
+  const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
       fetch(
@@ -28,8 +29,8 @@ const App = ()=> {
         }
       )
       .then( response => response.json())
-      .then( user => {setAuth(user)
-        console.log(user);
+      .then( user => {
+        setAuth(user)
       });
     }
   };
@@ -43,11 +44,24 @@ const App = ()=> {
     }
     grabProducts();
 
+    const getMe = async() =>
+    {
+      const userInfo = await getMeByToken();
+      setUser(userInfo);
+      console.log(user);
+
+    }
+    getMe();
+
     const getCart =async() =>
     {
-      console.log(auth);
+      const userCart = await grabUserCart(user.id);
+      setCart(userCart);
     }
+    
     getCart();
+    
+    
   }, []);
 
   const logout = ()=> {
@@ -100,7 +114,7 @@ const App = ()=> {
           )
         }
         <Link to ='/products'>Products</Link>
-        <Link to ='/cart'>Cart</Link>
+        <Link to ='/cart'>Cart({auth.id ? cart.length: null})</Link>
       </nav>
       <Routes>
         {
