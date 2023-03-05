@@ -8,9 +8,23 @@ export const getProducts = (async() =>{
     })
 })
 
-export const register= (async() =>
-{
+export const register = (async(username, password, name, email) =>
+{ 
     return fetch('api/users/register', {
         method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username:`${username}`,
+            password:`${password}`,
+            name:`${name}`,
+            email:`${email}`,
+            isAdministrator: false
+        })
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
     })
 })

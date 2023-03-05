@@ -3,7 +3,8 @@ const client = require('./client');
 const {
   getUserByToken,
   createUser,
-  authenticate
+  authenticate,
+  getUserByUsername
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
@@ -217,12 +218,6 @@ console.log(item3);
  console.log(allProducts)
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
-
-
-  const getCart = await getUserCart({userId:1});
-  console.log("--user cart by id--");
-  console.log(getCart);
-
 
 
 };
