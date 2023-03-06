@@ -43,24 +43,21 @@ const App = ()=> {
       setProducts(allProducts);
     }
     grabProducts();
-
-    const getMe = async() =>
+    
+    const getCart =async() =>
+      {
+        const userCart = await grabUserCart(user.id);
+        setCart(userCart);
+      }
+    
+      const getMe = async() =>
     {
       const userInfo = await getMeByToken();
       setUser(userInfo);
-      console.log(user);
-
+      //console.log(userInfo);
+      await getCart();
     }
-    getMe();
-
-    const getCart =async() =>
-    {
-      const userCart = await grabUserCart(user.id);
-      setCart(userCart);
-    }
-    
-    getCart();
-    
+    getMe();  
     
   }, []);
 
