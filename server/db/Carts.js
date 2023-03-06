@@ -25,7 +25,7 @@ async function getUserCart ({userId}) {
     {
         
         const item = await getProductById({id:cartItem.productsId});
-        cartItem.item =item;
+        cartItem.product =item;
         return cartItem;
     })
 
