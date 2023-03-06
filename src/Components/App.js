@@ -43,23 +43,24 @@ const App = ()=> {
       setProducts(allProducts);
     }
     grabProducts();
-    
+       
+
+  }, []);
+
+  useEffect(() =>
+  {    
     const getCart =async() =>
       {
-        const userCart = await grabUserCart(user.id);
+        
+        const userCart = await grabUserCart(auth.id);
         setCart(userCart);
       }
     
-      const getMe = async() =>
+    if(auth.id)
     {
-      const userInfo = await getMeByToken();
-      setUser(userInfo);
-      console.log(userInfo);
-      await getCart();
+      getCart();
     }
-    getMe();  
-    
-  }, []);
+  },[auth])
 
   const logout = ()=> {
     window.localStorage.removeItem('token');

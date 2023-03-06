@@ -8,6 +8,7 @@ const Register =() =>
     const [name, setName] =useState("");
     const [email, setEmail] =useState("");
     const [result, setResult] = useState({});
+    
     const goRegister = async(ev) =>
     {
         ev.preventDefault();

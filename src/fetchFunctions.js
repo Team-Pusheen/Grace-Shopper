@@ -30,7 +30,7 @@ export const register = (async(username, password, name, email) =>
 })
 
 export const grabUserCart = (async(userId) =>
-{
+{ 
     const token = window.localStorage.getItem('token');
     if(token)
     {
@@ -38,11 +38,11 @@ export const grabUserCart = (async(userId) =>
             method:'GET',
             headers:{
                 'Content-Type': 'application/json',
-                'Athorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
         }).then(responce => responce.json())
         .then(result => {
-            console.log(result);
+            //console.log(result);
             return result;
         })
     }
@@ -50,28 +50,4 @@ export const grabUserCart = (async(userId) =>
         return [];
     }
     
-})
-
-export const getMeByToken = (async() =>
-{
-    const token = window.localStorage.getItem('token');
-    if(token)
-    {
-        return fetch('api/users/me',{
-            method:"GET",
-            headers:{
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        }).then(responce => responce.json())
-            .then(result =>{
-                //console.log(result);
-                return result;
-            })
-    }
-    else{
-        return null;
-    }
-    
-
 })

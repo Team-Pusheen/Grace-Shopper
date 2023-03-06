@@ -41,7 +41,7 @@ const syncTables = async () => {
     price INTEGER NOT NULL,
     stock INTEGER NOT NULL,
     rarity INTEGER NOT NULL,
-    "imageURL" VARCHAR(250)  
+    "imageURL" VARCHAR(1500)  
   );
 
   CREATE TABLE carts(
@@ -113,7 +113,7 @@ const syncAndSeed = async () => {
       category: "weapon"
     }),
     createProduct({
-      name: "staff",
+      name: "Staff",
       description:
         "A simple wooden staff for novices. Also works as a walking stick",
       price: 20,
@@ -154,7 +154,7 @@ const syncAndSeed = async () => {
       price:560,
       stock:602,
       rarity:2,
-      imageURL: "https://static.wikia.nocookie.net/devilmaycry/images/9/91/Rebellion_DMC5.png/revision/latest?cb=20181028035650",
+      imageURL: "https://m.media-https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb0fb63-c99a-49e6-819f-619c0dfae6b1/dce3r1t-c87c22a5-0b5b-4058-aedf-3407335cbedc.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZjYjBmYjYzLWM5OWEtNDllNi04MTlmLTYxOWMwZGZhZTZiMVwvZGNlM3IxdC1jODdjMjJhNS0wYjViLTQwNTgtYWVkZi0zNDA3MzM1Y2JlZGMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._WY9sf-Qc9VZQnNKn8vLRNuEmWzInLZHe9OckstXPRo.com/images/I/41-YPTqh06L.jpg",
       category: "weapon"
     })
   ])

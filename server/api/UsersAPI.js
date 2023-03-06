@@ -63,31 +63,5 @@ router.get('/:userId/cart', async(req, res, next) =>{
 
 })
 
-//get user's information via token
-router.get('/me', async(req, res, next) =>
-{
-
-    try{
-        const prefix ='Bearer ';
-        const auth = req.header('Authorization');
-
-        if(auth){
-            const token = auth.slice(prefix.length);
-            
-            const userInfo = await getUserByToken(token);
-            res.send(userInfo);
-        }else{
-            next({
-                name:"NeedLogin",
-                message:"You must be logged in to do this action"
-            })
-        }
-
-        
-    }catch(error)
-    {
-        next(error);
-    }
-})
 
 module.exports = router;

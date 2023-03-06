@@ -2,42 +2,21 @@ import React, {useState} from "react";
 
 
 const Cart =({cart, products}) =>
-{
-    const [cartItems, setCartItems] = useState([]);
+{   
 
-    const findItems = async() =>
-    {
-        const itemArray=[];
-
-    for(let i=0; i<cart.length; i++)
-    {
-        const foundItem = products.find((product) =>
-        {
-            return product ? product.id === cart[0].productsId:null;
-        })
-        itemArray.push(foundItem);
-    }
-        console.log(itemArray);
-        setCartItems(itemArray);
-
-    }
-    
-
-    if(cartItems.length ===0 && cart.length>0)
-    {  
-        //findItems();
-    }
+    console.log(cart);
 
     return <div>
         <h3>Your Cart:</h3>
-        {/*cart ?
+        {cart ?
             cart.map((item) =>
             {   
                 return<div key={item.id}>
+                    <h3>{item.item[0].name}</h3>
                     <p>Amount: {item.quantity}</p>
                 </div>
             })
-        :null */}
+        :null}
     </div>
 }
 
