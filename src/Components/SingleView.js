@@ -34,6 +34,7 @@ const SingleView = ({ products }) => {
         <b>category: </b>
         {product.category}
       </p>
+      <button onClick={}>add to cart</button>
     </div>
   );
 };
