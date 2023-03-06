@@ -54,7 +54,7 @@ const App = ()=> {
     {
       const userInfo = await getMeByToken();
       setUser(userInfo);
-      //console.log(userInfo);
+      console.log(userInfo);
       await getCart();
     }
     getMe();  

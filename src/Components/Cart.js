@@ -5,26 +5,39 @@ const Cart =({cart, products}) =>
 {
     const [cartItems, setCartItems] = useState([]);
 
-    const itemArray=[];
+    const findItems = async() =>
+    {
+        const itemArray=[];
+
     for(let i=0; i<cart.length; i++)
     {
-        itemArray = products.find((product) =>
+        const foundItem = products.find((product) =>
         {
-            return product ? product.id === cart.productsId:null;
+            return product ? product.id === cart[0].productsId:null;
         })
+        itemArray.push(foundItem);
+    }
+        console.log(itemArray);
+        setCartItems(itemArray);
+
+    }
+    
+
+    if(cartItems.length ===0 && cart.length>0)
+    {  
+        //findItems();
     }
 
-    setCartItems(itemArray);
-
     return <div>
-        {cartItems ?
+        <h3>Your Cart:</h3>
+        {/*cart ?
             cart.map((item) =>
             {   
                 return<div key={item.id}>
                     <p>Amount: {item.quantity}</p>
                 </div>
             })
-       :null }
+        :null */}
     </div>
 }
 
