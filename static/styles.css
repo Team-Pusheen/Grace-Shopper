@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 body {
-  font-family: verdana;
+  font-family: 'VT323', monospace;
+  background-color: #e7e7db;
 }
 
 form {
@@ -11,7 +14,86 @@ form > * {
   margin: 1rem;
 }
 
+/*------ TITLE/LOGIN/REGISTER ------*/
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin-left: 45%;
+  color: #609966;
+  font-size: 40px;
+}
+
+.login-btn {
+  cursor: pointer;
+  background-color: #AD8E70;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border-style: none;
+  margin-left: 10px;
+  font-size: 20px;
+  font-family: 'VT323', monospace;
+}
+
+/*------ NAV ------*/
+
 nav {
   display: flex;
   justify-content: space-around;
+  background-color: white;
+  padding: 8px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 1px rgba(80, 80, 80, 0.149);
+  font-size: 24px;
+
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;  
+  transition: 0.2s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #DC0000;
+
+}
+
+/*------- PRODUCT PAGE ------*/
+
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.card {
+  border-radius: 15px;
+  width: 300px;
+  background-color: white;
+  text-align: center;
+  margin: 30px;
+  transition: 0.3s all ease-in-out;
+}
+
+.card img {
+  width: 100%;
+  transition: 0.3s all ease-in-out;
+}
+
+.card:hover img {
+  transform: scale(0.9);
+}
+
+.card:hover {
+  box-shadow: 2px 2px 5px 1px rgba(80, 80, 80, 0.25);
+
 }
