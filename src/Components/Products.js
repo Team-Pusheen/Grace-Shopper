@@ -8,14 +8,22 @@ const Products =({products}) =>
        
     return <div>{products ?<div>
         <h2>Magical Wares</h2>
-        <ul>
+        <div className="cardContainer">
             {
                 products.map((product) =>
                 {
-                   return <li key={product.id}><Link to={`/products/:${product.id}`}>{product.name}</Link></li>
+
+                   return <div key={product.id} className="card" id={product.id}>
+                    
+                    <Link to={`/products/:${product.id}`}> <img src={product.imageURL} /></Link>
+                    <h3><Link to={`/products/:${product.id}`}>{product.name}</Link></h3>
+                    <p>{product.price} Copper Coins</p>
+                  
+                    </div>
+
                 })
             }
-        </ul>
+        </div>
         </div>:null}
     </div>
 }

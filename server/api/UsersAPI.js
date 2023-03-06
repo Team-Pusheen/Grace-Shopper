@@ -8,7 +8,6 @@ const JWT = process.env.JWT;
 router.post('/register', async(req, res, next) =>
 {   
     const {username,password,name,email,isAdministrator} =req.body;
-
     try{
 
         const userExists = await getUserByUsername({username});
@@ -17,14 +16,15 @@ router.post('/register', async(req, res, next) =>
         {
             const newUser = await createUser({username:username, password:password,name:name, email:email, isAdministrator:isAdministrator});
             res.send({
-                message: `Welcome ${username} to the Pusheen Baazar.`,
+                name: 'Welcome',
+                message: `Welcome ${username}, to the Pusheen Baazar!`,
                 user:newUser
             });
         }
         else{
             next({
                 name:"UserExistsError",
-                message: `Username ${username} is alredy taken.`
+                message: `Username ${username} is already taken.`
             })
         }
 
@@ -34,6 +34,15 @@ router.post('/register', async(req, res, next) =>
     }
 })
 
+//get user's cart
+router.get('/:userId/cart', async(req, res, next) =>{
 
+})
+
+//get user's information
+router.get('/userId/me', async(req, res, next) =>
+{
+    
+})
 
 module.exports = router;

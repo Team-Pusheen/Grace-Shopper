@@ -3,14 +3,17 @@ import Home from './Home';
 import Login from './Login';
 import Products from './Products';
 import Register from './Register';
+import Cart from './Cart';
 import {getProducts} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
 
 
+
 const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
+  const [cart, setCart] = useState([]);
 
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
@@ -25,7 +28,9 @@ const App = ()=> {
         }
       )
       .then( response => response.json())
-      .then( user => setAuth(user));
+      .then( user => {setAuth(user)
+        console.log(user);
+      });
     }
   };
 
@@ -37,6 +42,12 @@ const App = ()=> {
       setProducts(allProducts);
     }
     grabProducts();
+
+    const getCart =async() =>
+    {
+      console.log(auth);
+    }
+    getCart();
   }, []);
 
   const logout = ()=> {
@@ -69,26 +80,25 @@ const App = ()=> {
 
   return (
     <div>
+      <div className="top-container">
       <h1>Pusheen Bazaar</h1>
-      <nav>
-        {
+      {
           auth.id ? (
             <>
-              <Link to='/'>Home</Link>
-              <button onClick={ logout }>Logout { auth.username }</button>
+              <button className='login-btn' onClick={ logout }>Logout { auth.username }</button>
             </>
           ) : (
-            <>
-            <>
-              <Link to='/login'>Login</Link>
-            </>
-            <>
-              <Link to ='/register'>Sign Up</Link>
-            </>
-            </>
+            <div className='login-register'>
+              <Link to='/login'><button className='login-btn'>Login</button></Link>
+              <Link to ='/register'><button className='login-btn'>Sign Up</button></Link>
+            </div>
           )
         }
+        </div>
+      <nav>
+        <Link to='/'>Home</Link>
         <Link to ='/products'>Products</Link>
+        <Link to ='/cart'>Cart</Link>
       </nav>
       <Routes>
         {
@@ -109,7 +119,10 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
+
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
+        <Route path = '/cart' element={<Cart cart={cart}/>} />
+
       </Routes>
     </div>
   );

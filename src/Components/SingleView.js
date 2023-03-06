@@ -10,7 +10,7 @@ const SingleView = ({ products }) => {
     return null;
   }
 
-  return (
+  return ( product ?
     <div>
       <h1>{product.name}</h1>
       <img src={product.imageURL} />
@@ -34,8 +34,9 @@ const SingleView = ({ products }) => {
         <b>category: </b>
         {product.category}
       </p>
-      <button onClick={}>add to cart</button>
+      
     </div>
+    : null
   );
 };
 
