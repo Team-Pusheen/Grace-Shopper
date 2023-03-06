@@ -3,14 +3,18 @@ const client = require('./client');
 const {
   getUserByToken,
   createUser,
-  authenticate
+  authenticate,
+  getUserByUsername
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
+
 const {attachReviews, getAllProducts, getProductsByCategory} = require('./Products')
 const {getUserCart} = require("./Carts")
+
+
 
 const syncTables = async () => {
   const SQL = `
@@ -87,6 +91,13 @@ const syncAndSeed = async () => {
       email: "lucy.lucky@email.com",
       isAdministrator: true,
     }),
+    createUser({
+      username: "Admin_Tyler",
+      password: "AdminT",
+      name: "Tyler",
+      email:"tyler.admin@pusheen.com",
+      isAdministrator: true,
+    })
   ]);
   console.log("--- seeded users ---");
   console.log(moe);
@@ -195,6 +206,7 @@ console.log(item3);
  console.log("--New Amount--");
  console.log(newAmount);
 
+
   
  const deleteIt = await deleteProduct({id: 1})
  console.log('--Delete Product--');
@@ -207,11 +219,6 @@ console.log(item3);
  
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
-
-
-  const getCart = await getUserCart({userId:1});
-  console.log("--user cart by id--");
-  console.log(getCart);
 
 
 };
@@ -234,5 +241,6 @@ module.exports = {
   getProductsByCategory,
   getReviewsByUserId,
   getAllProducts,
-  client
+  client,
+  
 };
