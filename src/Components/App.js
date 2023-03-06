@@ -80,25 +80,23 @@ const App = ()=> {
 
   return (
     <div>
+      <div className="top-container">
       <h1>Pusheen Bazaar</h1>
-      <nav>
-        {
+      {
           auth.id ? (
             <>
-              <Link to='/'>Home</Link>
-              <button onClick={ logout }>Logout { auth.username }</button>
+              <button className='login-btn' onClick={ logout }>Logout { auth.username }</button>
             </>
           ) : (
-            <>
-            <>
-              <Link to='/login'>Login</Link>
-            </>
-            <>
-              <Link to ='/register'>Sign Up</Link>
-            </>
-            </>
+            <div className='login-register'>
+              <Link to='/login'><button className='login-btn'>Login</button></Link>
+              <Link to ='/register'><button className='login-btn'>Sign Up</button></Link>
+            </div>
           )
         }
+        </div>
+      <nav>
+        <Link to='/'>Home</Link>
         <Link to ='/products'>Products</Link>
         <Link to ='/cart'>Cart</Link>
       </nav>

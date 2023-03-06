@@ -216,6 +216,7 @@ console.log(item3);
  const allProducts = await getAllProducts()
  console.log("-- all products --")
  console.log(allProducts)
+ 
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
 
