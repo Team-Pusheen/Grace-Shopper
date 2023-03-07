@@ -219,10 +219,6 @@ console.log(item3);
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
 
-const userCart = await getUserCart({userId:1});
-console.log("--User Cart--")
-console.log(userCart);
-
 };
 
 

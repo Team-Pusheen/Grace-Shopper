@@ -4,7 +4,7 @@ import {deleteFromCart, dumpCart, reduceStock} from "../fetchFunctions";
 const Cart =({cart, setCart}) =>
 {   
     const [totalPrice, setTotalPrice] = useState("");
-
+    const [purchaseMade, setPurchaseMade] = useState(false);
     console.log(cart);
 
     useEffect(() =>
@@ -33,16 +33,17 @@ const Cart =({cart, setCart}) =>
     {   //need to figure out the issue with getting a null constraint when reducing stock
         
         //alter the stock of the item
-        cart.forEach( async(item) =>
-        {  const newStock = item.product.stock - item.quantity
-            await reduceStock(item.product.id, newStock);
-        })
-
+        for(let i=0; i< cart.length; i++)
+        {
+            const newStock = cart[i].product.stock - cart[i].quantity;
+            const reducedProduct = await reduceStock(cart[i].product.id, newStock);
+        }
+         
         //empty the cart
         const id =cart[0].cartId;
         await dumpCart(id);
         setCart([]);
-
+        setPurchaseMade(true);
     }
 
     return <div>
@@ -64,6 +65,7 @@ const Cart =({cart, setCart}) =>
         <h2>Total: {totalPrice} copper coins</h2>
         <button onClick={purchase}>Purchase Wares</button></>
         :<button disabled>Purchase Wares</button>}
+        {purchaseMade ? <h1>Thank you for your patronage! (=^-ω-^=)</h1>:null}
     </div>
 }
 

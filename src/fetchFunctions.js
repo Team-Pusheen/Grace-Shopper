@@ -88,7 +88,6 @@ export const  dumpCart = async(cartId) =>
             }
         }).then(responce => responce.json())
         .then(result => {
-                console.log(result);
                 return result;
             })
     }
@@ -102,11 +101,14 @@ export const reduceStock = async(productsId, stock) =>
     return fetch(`api/products/purchase/${productsId}`,
     {
         method: "PATCH",
+        headers:{
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-            stock:`${stock}`
+            stock:`${stock}`,
         })
     }).then(responce => responce.json())
     .then(result => {
-        console.log(result);
+        return result;
     })
 }
