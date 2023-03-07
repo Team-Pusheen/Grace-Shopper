@@ -1,15 +1,14 @@
 import React from "react";
-
+import {deleteFromCart} from "../fetchFunctions";
 
 const Cart =({cart}) =>
 {   
 
     console.log(cart);
 
-    const removeItem = async(id) =>
+    const removeItem = async(cartId, productId) =>
     {
-        const removedItem = await deleteFromCart(id);
-        
+        const removedItem = await deleteFromCart(cartId, productId);
     }
 
     return <div>
@@ -18,9 +17,10 @@ const Cart =({cart}) =>
             cart.map((item) =>
             {   
                 return<div key={item.id}>
-                    <h3>{item.product[0].name}</h3>
+                    <h3>{item.product.name}</h3>
+                    <img src={item.product.imageURL}></img>
                     <p>Amount: {item.quantity}</p>
-                    <button onClick={() =>removeItem(item.id)}>X</button>
+                    <button onClick={() =>removeItem(item.id,item.product.id )}>X</button>
                 </div>
             })
         :null}

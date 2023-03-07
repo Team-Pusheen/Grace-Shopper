@@ -42,7 +42,6 @@ export const grabUserCart = (async(userId) =>
             },
         }).then(responce => responce.json())
         .then(result => {
-            //console.log(result);
             return result;
         })
     }
@@ -51,3 +50,24 @@ export const grabUserCart = (async(userId) =>
     }
     
 })
+
+export const deleteFromCart  = async(cartId, productsId) =>
+{   
+    const token = window.localStorage.getItem('token');
+
+    if(token)
+    {
+        return fetch(`api/cartProducts/${cartId}/${productsId}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(responce => responce.json())
+        .then(result => {
+            console.log(result);
+            return result;
+        })
+    }
+    
+}

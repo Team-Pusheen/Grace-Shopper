@@ -18,14 +18,15 @@ async function getUserCart ({userId}) {
     ;`
     const {rows:[id]} = await client.query(SQL, [userId]);
     
-    
-    const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = id;`);
+    const cartId = id.id;
+        
+    const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = $1;`,[id.id]);
     
     const cart = rows.map(async(cartItem) =>
     {
         
         const item = await getProductById({id:cartItem.productsId});
-        cartItem.product =item;
+        cartItem.product =item[0];
         return cartItem;
     })
 

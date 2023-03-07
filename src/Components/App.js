@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts, grabUserCart, getMeByToken} from "../fetchFunctions"
+import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
 
