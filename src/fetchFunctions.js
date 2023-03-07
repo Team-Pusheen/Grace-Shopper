@@ -96,3 +96,17 @@ export const  dumpCart = async(cartId) =>
         //this is for a guest user.
     }
 }
+
+export const reduceStock = async(productsId, stock) =>
+{
+    return fetch(`api/products/purchase/${productsId}`,
+    {
+        method: "PATCH",
+        body: JSON.stringify({
+            stock:`${stock}`
+        })
+    }).then(responce => responce.json())
+    .then(result => {
+        console.log(result);
+    })
+}

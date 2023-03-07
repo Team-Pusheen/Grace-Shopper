@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {deleteFromCart, dumpCart} from "../fetchFunctions";
+import {deleteFromCart, dumpCart, reduceStock} from "../fetchFunctions";
 
 const Cart =({cart, setCart}) =>
 {   
@@ -30,9 +30,19 @@ const Cart =({cart, setCart}) =>
     }
 
     const purchase = async() =>
-    {   const id =cart[0].cartId;
-        const emptyCart = await dumpCart(id);
+    {   //need to figure out the issue with getting a null constraint when reducing stock
+        
+        //alter the stock of the item
+        cart.forEach( async(item) =>
+        {  const newStock = item.product.stock - item.quantity
+            await reduceStock(item.product.id, newStock);
+        })
+
+        //empty the cart
+        const id =cart[0].cartId;
+        await dumpCart(id);
         setCart([]);
+
     }
 
     return <div>
@@ -43,7 +53,7 @@ const Cart =({cart, setCart}) =>
                 return<div key={item.id}>
                     <h3>{item.product.name}</h3>
                     <img src={item.product.imageURL}></img>
-                    <p>Amount: {item.quantity}</p>
+                    <p>Amount: <button>+</button>{item.quantity}<button>-</button></p>
                     <p>{item.quantity * item.product.price} copper coins</p>
                     <button onClick={() =>removeItem(item.cartId,item.product.id )}>X</button>
                 </div>

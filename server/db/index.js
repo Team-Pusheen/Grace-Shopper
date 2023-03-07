@@ -168,7 +168,7 @@ const [item1, item2, item3] = await Promise.all([
   addProduct({
     productsId: 4,
     cartId: 1,
-    quantity: 4
+    quantity: 1
   }),
   addProduct({
     productsId: 2,
@@ -178,7 +178,7 @@ const [item1, item2, item3] = await Promise.all([
   addProduct({
     productsId:3,
     cartId:1,
-    quantity:4
+    quantity:1
   })
 ])
 console.log("--seeded cart products--");
