@@ -51,8 +51,8 @@ export const grabUserCart = (async(userId) =>
     
 })
 
-export const deleteFromCart  = async(cartId, productsId) =>
-{   console.log()
+export const deleteFromCart = async(cartId, productsId) =>
+{   
     const token = window.localStorage.getItem('token');
 
     if(token)
@@ -67,6 +67,32 @@ export const deleteFromCart  = async(cartId, productsId) =>
         .then(result => {
             return result;
         })
+    }else{
+        //this is for a guest user.
     }
     
+}
+
+export const  dumpCart = async(cartId) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    if(token)
+    {
+        return fetch(`api/cartProducts/${cartId}`,
+        {
+            method: "DELETE",
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(responce => responce.json())
+        .then(result => {
+                console.log(result);
+                return result;
+            })
+    }
+    else{
+        //this is for a guest user.
+    }
 }
