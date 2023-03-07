@@ -52,7 +52,7 @@ export const grabUserCart = (async(userId) =>
 })
 
 export const deleteFromCart  = async(cartId, productsId) =>
-{   
+{   console.log()
     const token = window.localStorage.getItem('token');
 
     if(token)
@@ -65,7 +65,6 @@ export const deleteFromCart  = async(cartId, productsId) =>
             }
         }).then(responce => responce.json())
         .then(result => {
-            console.log(result);
             return result;
         })
     }
