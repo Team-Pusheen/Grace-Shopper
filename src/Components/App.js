@@ -91,25 +91,23 @@ const App = ()=> {
 
   return (
     <div>
+      <div className="top-container">
       <h1>Pusheen Bazaar</h1>
-      <nav>
-        {
+      {
           auth.id ? (
             <>
-              <Link to='/'>Home</Link>
-              <button onClick={ logout }>Logout { auth.username }</button>
+              <button className='login-btn' onClick={ logout }>Logout { auth.username }</button>
             </>
           ) : (
-            <>
-            <>
-              <Link to='/login'>Login</Link>
-            </>
-            <>
-              <Link to ='/register'>Sign Up</Link>
-            </>
-            </>
+            <div className='login-register'>
+              <Link to='/login'><button className='login-btn'>Login</button></Link>
+              <Link to ='/register'><button className='login-btn'>Sign Up</button></Link>
+            </div>
           )
         }
+        </div>
+      <nav>
+        <Link to='/'>Home</Link>
         <Link to ='/products'>Products</Link>
         <Link to ='/cart'>Cart({auth.id ? cart.length: null})</Link>
       </nav>
@@ -132,7 +130,7 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-        <Route path= '/products/:productsId' element={<SingleView/>}/>
+        <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
         <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes>
     </div>

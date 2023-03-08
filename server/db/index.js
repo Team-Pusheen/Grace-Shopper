@@ -119,6 +119,7 @@ const syncAndSeed = async () => {
       price: 20,
       stock: 200,
       rarity: 1,
+      imageURL: "https://oldschool.runescape.wiki/images/thumb/Bryophyta%27s_staff_%28uncharged%29_detail.png/1200px-Bryophyta%27s_staff_%28uncharged%29_detail.png?7ef7e",
       category: "weapon"
     }),
     createProduct({
@@ -216,6 +217,7 @@ console.log(item3);
  const allProducts = await getAllProducts()
  console.log("-- all products --")
  console.log(allProducts)
+ 
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
 
