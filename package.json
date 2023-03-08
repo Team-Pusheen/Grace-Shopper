@@ -20,6 +20,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.21",
     "pg": "^8.9.0",
+    "react-icons": "^4.8.0",
     "reload": "^3.2.1",
     "sequelize": "^6.28.2"
   },
