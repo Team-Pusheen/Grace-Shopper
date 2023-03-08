@@ -140,7 +140,7 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-        <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} />}/>
+        <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes> 
