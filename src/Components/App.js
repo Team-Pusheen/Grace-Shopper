@@ -6,7 +6,9 @@ import Register from './Register';
 import Cart from './Cart';
 import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
-import { Link, Routes, Route } from 'react-router-dom';
+import Footer from "./Footer"
+import { Link, NavLink, Routes, Route } from 'react-router-dom';
+import { GiSwordman, GiOpenChest, GiLockedChest } from 'react-icons/gi'
 
 
 
@@ -90,9 +92,15 @@ const App = ()=> {
   };
 
   return (
-    <div>
-      <div className="top-container">
-      <h1>Pusheen Bazaar</h1>
+    <div>  
+      <nav>
+        <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
+        <div className="top-container">
+        <div className="logo-div">        
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to ='/products'>Products</NavLink>
+        
+        </div>
       {
           auth.id ? (
             <>
@@ -102,15 +110,15 @@ const App = ()=> {
             <div className='login-register'>
               <Link to='/login'><button className='login-btn'>Login</button></Link>
               <Link to ='/register'><button className='login-btn'>Sign Up</button></Link>
+              <NavLink to ='/cart'>Cart({auth.id ? cart.length: null}) <GiLockedChest className='chest-closed' /></NavLink>
             </div>
           )
         }
         </div>
-      <nav>
-        <Link to='/'>Home</Link>
-        <Link to ='/products'>Products</Link>
-        <Link to ='/cart'>Cart({auth.id ? cart.length: null})</Link>
       </nav>
+        <div className='body-container'>
+       
+    
       <Routes>
         {
           auth.id ? (
@@ -131,8 +139,12 @@ const App = ()=> {
         }
         <Route path= '/products' element={<Products products={products}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
-        <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
-      </Routes>
+
+      <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
+      </Routes> 
+      </div>
+      <Footer />
+
     </div>
   );
 };
