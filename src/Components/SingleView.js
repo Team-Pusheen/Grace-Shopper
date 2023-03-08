@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import {toCart} from "../fetchFunctions"
 
-const SingleView = ({ products }) => {
+const SingleView = ({ products, cartId, setCart, cart }) => { 
   const [cartItems, setCartItems] = useState([]);
   const { productsId } = useParams();
   const id = productsId.slice(1);
@@ -10,9 +11,10 @@ const SingleView = ({ products }) => {
     return null;
   }
 
-  const addToCart = (e) => {
+  const addToCart = async (e) => {
     e.preventDefault();
-    setCartItems([...cartItems, product]);
+   const newAddedItem = await toCart ( cartId, id, 1);
+    setCartItems([...cart, newAddedItem]);
   }
 
   return ( product ?

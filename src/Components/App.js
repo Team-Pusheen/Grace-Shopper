@@ -32,6 +32,7 @@ const App = ()=> {
       .then( response => response.json())
       .then( user => {
         setAuth(user)
+        console.log(user);
       });
     }
   };
@@ -139,7 +140,7 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-        <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
+        <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} />}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes> 
