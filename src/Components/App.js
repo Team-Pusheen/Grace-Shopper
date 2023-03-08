@@ -103,9 +103,10 @@ const App = ()=> {
         </div>
       {
           auth.id ? (
-            <>
+            <div className='login-register'>
               <button className='login-btn' onClick={ logout }>Logout { auth.username }</button>
-            </>
+              <NavLink to ='/cart'>Cart({auth.id ? cart.length: null}) <GiLockedChest className='chest-closed' /></NavLink>
+            </div>
           ) : (
             <div className='login-register'>
               <Link to='/login'><button className='login-btn'>Login</button></Link>
