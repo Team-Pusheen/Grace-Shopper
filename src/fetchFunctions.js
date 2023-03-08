@@ -48,10 +48,8 @@ export const grabUserCart = (async(userId) =>
     else{
         return [];
     }
-    
 })
-
-export const deleteFromCart = async(cartId, productsId) =>
+    export const deleteFromCart = async(cartId, productsId) =>
 {   
     const token = window.localStorage.getItem('token');
 
@@ -132,4 +130,25 @@ export const cartAmountUpdate = async(cartId, productsId, quantity) =>
     .then(result =>{
         return result;
     })
+    
 }
+
+export const toCart = (async(cartId, productsId, quantity) =>
+{
+    return fetch(`api/cartProducts/${cartId}/${productsId}`, {
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`  
+        },
+        body: JSON.stringify({
+            quantity:`${quantity}`
+        })
+    }).then(response => response.json())
+    .then(result =>{ console.log(result)
+        return result;
+    })
+
+})
+
+

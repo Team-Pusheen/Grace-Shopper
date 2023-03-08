@@ -19,9 +19,9 @@ const createUser = async ({
     VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
 
-  //const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
+  const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
 
-  const response = await client.query(SQL, [ username, password, name, email, isAdministrator ]);
+  const response = await client.query(SQL, [ username, hashedPassword, name, email, isAdministrator ]);
   delete response.rows[0].password;
   const userId = response.rows[0].id
   const cartId = await createCart({userId:userId});
@@ -49,17 +49,15 @@ const getUserByToken = async (token) => {
 
 const authenticate = async ({ username, password }) => {
   const SQL = `
-    SELECT id
+    SELECT *
     FROM users
-    WHERE username = $1 and password = $2
+    WHERE username = $1
   `;
 
-  //const hashedPassword = bcrypt.hashSync(password, SALT_COUNT);
 
-
-  const response = await client.query(SQL, [username, password]);
-  console.log(response);
-  if (!response.rows.length) {
+  const response = await client.query(SQL, [username]);
+  console.log(response.rows);
+  if (!response.rows.length || !(await bcrypt.compare(password,response.rows[0].password))) {
     const error = Error("not authorized");
     error.status = 401;
     throw error;
