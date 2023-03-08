@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const SingleView = ({ products }) => {
-  // const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const { productsId } = useParams();
   const id = productsId.slice(1);
   const product = products.find((product) => product.id == id * 1);
   if (!product) {
     return null;
+  }
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    setCartItems([...cartItems, product]);
   }
 
   return ( product ?
@@ -34,7 +39,8 @@ const SingleView = ({ products }) => {
         <b>category: </b>
         {product.category}
       </p>
-      
+      <form onSubmit={addToCart}  > <button>add to cart</button> </form>
+      <button>add to cart</button>
     </div>
     : null
   );
