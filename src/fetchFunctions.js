@@ -48,7 +48,7 @@ export const grabUserCart = (async(userId) =>
     else{
         return [];
     }
-
+})
     export const deleteFromCart = async(cartId, productsId) =>
 {   
     const token = window.localStorage.getItem('token');
@@ -131,7 +131,7 @@ export const cartAmountUpdate = async(cartId, productsId, quantity) =>
         return result;
     })
     
-})
+}
 
 export const toCart = (async(cartId, productsId, quantity) =>
 {
