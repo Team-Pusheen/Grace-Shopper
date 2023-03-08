@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts} from "../fetchFunctions"
+import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
 import { Link, NavLink, Routes, Route } from 'react-router-dom';
@@ -17,7 +17,7 @@ const App = ()=> {
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
 
-  const attemptLogin = ()=> {
+  const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
       fetch(
@@ -30,8 +30,8 @@ const App = ()=> {
         }
       )
       .then( response => response.json())
-      .then( user => {setAuth(user)
-        console.log(user);
+      .then( user => {
+        setAuth(user)
       });
     }
   };
@@ -44,13 +44,24 @@ const App = ()=> {
       setProducts(allProducts);
     }
     grabProducts();
+       
 
-    const getCart =async() =>
-    {
-      console.log(auth);
-    }
-    getCart();
   }, []);
+
+  useEffect(() =>
+  {    
+    const getCart =async() =>
+      {
+        
+        const userCart = await grabUserCart(auth.id);
+        setCart(userCart);
+      }
+    
+    if(auth.id)
+    {
+      getCart();
+    }
+  },[auth])
 
   const logout = ()=> {
     window.localStorage.removeItem('token');
@@ -99,7 +110,7 @@ const App = ()=> {
             <div className='login-register'>
               <Link to='/login'><button className='login-btn'>Login</button></Link>
               <Link to ='/register'><button className='login-btn'>Sign Up</button></Link>
-              <NavLink to ='/cart'>Cart <GiLockedChest className='chest-closed' /></NavLink>
+              <NavLink to ='/cart'>Cart({auth.id ? cart.length: null}) <GiLockedChest className='chest-closed' /></NavLink>
             </div>
           )
         }
@@ -127,13 +138,13 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
-        <Route path = '/cart' element={<Cart cart={cart}/>} />
 
+      <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes> 
       </div>
       <Footer />
+
     </div>
   );
 };
