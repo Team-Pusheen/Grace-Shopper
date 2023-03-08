@@ -56,7 +56,6 @@ const authenticate = async ({ username, password }) => {
 
 
   const response = await client.query(SQL, [username]);
-  console.log(response.rows);
   if (!response.rows.length || !(await bcrypt.compare(password,response.rows[0].password))) {
     const error = Error("not authorized");
     error.status = 401;
