@@ -40,7 +40,12 @@ const SingleView = ({ products }) => {
         {product.category}
       </p>
       <form onSubmit={addToCart}  > <button>add to cart</button> </form>
-      <button>add to cart</button>
+      <h2>Cart</h2>
+      <ul>
+        {cartItems.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul>
     </div>
     : null
   );
