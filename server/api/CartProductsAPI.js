@@ -74,8 +74,8 @@ router.delete('/:cartId/:productId', async (req, res, next) =>{
             const token = auth.slice(prefix.length);
             const user = jwt.verify(token, JWT);
 
-            const {cartId, productsId} = req.params;
-            const deletedItem = await removeItem({cartId:cartId, productsId:productsId});
+            const {cartId, productId} = req.params;
+            const deletedItem = await removeItem({cartId:cartId, productsId:productId});
             res.send(deletedItem);
         }
         else{

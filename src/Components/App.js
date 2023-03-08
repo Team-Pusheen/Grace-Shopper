@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts} from "../fetchFunctions"
+import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const App = ()=> {
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
 
-  const attemptLogin = ()=> {
+  const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
       fetch(
@@ -28,8 +28,8 @@ const App = ()=> {
         }
       )
       .then( response => response.json())
-      .then( user => {setAuth(user)
-        console.log(user);
+      .then( user => {
+        setAuth(user)
       });
     }
   };
@@ -42,13 +42,24 @@ const App = ()=> {
       setProducts(allProducts);
     }
     grabProducts();
+       
 
-    const getCart =async() =>
-    {
-      console.log(auth);
-    }
-    getCart();
   }, []);
+
+  useEffect(() =>
+  {    
+    const getCart =async() =>
+      {
+        
+        const userCart = await grabUserCart(auth.id);
+        setCart(userCart);
+      }
+    
+    if(auth.id)
+    {
+      getCart();
+    }
+  },[auth])
 
   const logout = ()=> {
     window.localStorage.removeItem('token');
@@ -98,7 +109,7 @@ const App = ()=> {
       <nav>
         <Link to='/'>Home</Link>
         <Link to ='/products'>Products</Link>
-        <Link to ='/cart'>Cart</Link>
+        <Link to ='/cart'>Cart({auth.id ? cart.length: null})</Link>
       </nav>
       <Routes>
         {
@@ -119,10 +130,8 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
-        <Route path = '/cart' element={<Cart cart={cart}/>} />
-
+        <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes>
     </div>
   );

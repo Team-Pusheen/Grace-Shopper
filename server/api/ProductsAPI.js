@@ -149,7 +149,6 @@ router.patch('/purchase/:productsId', async (req, res, next) =>
     try{
         const {productsId} = req.params;
         const {stock} = req.body;
-
         const updatedProduct = await changeStockOfProduct({productsId:productsId, stock:stock});
         res.send(updatedProduct);
 

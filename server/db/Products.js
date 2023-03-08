@@ -122,11 +122,12 @@ const changeStockOfProduct = async ({productsId, stock}) =>
   try{
     const SQL =`
     UPDATE products
-    SET stock =$2
+    SET stock = $2
     WHERE id = $1
     RETURNING *
     ;`
-    const {rows} = client.query(SQL, [productsId, stock]);
+    const {rows} = await client.query(SQL, [productsId, stock]);
+    
     return rows[0];
 
   }catch(error)
