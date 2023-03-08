@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {deleteFromCart, dumpCart, reduceStock} from "../fetchFunctions";
+import {deleteFromCart, dumpCart, reduceStock, cartAmountUpdate, grabUserCart} from "../fetchFunctions";
 
-const Cart =({cart, setCart}) =>
+
+const Cart =({cart, setCart, id}) =>
 {   
     const [totalPrice, setTotalPrice] = useState("");
     const [purchaseMade, setPurchaseMade] = useState(false);
@@ -46,6 +47,38 @@ const Cart =({cart, setCart}) =>
         setPurchaseMade(true);
     }
 
+    const add = async(productsId, quantity, cartId, stock) =>
+    {
+        const newAmount = quantity +1;
+        if(newAmount < stock)
+        {
+            await cartAmountUpdate(cartId, productsId, newAmount);
+            await newCart();
+        }
+
+    }
+
+    const subtract = async(productsId, quantity, cartId) =>
+    {
+        const newAmount = quantity -1;
+        if(newAmount >0)
+        {
+            await cartAmountUpdate(cartId, productsId, newAmount)
+            await newCart();
+        }
+        else if(newAmount <=0)
+        {
+            await removeItem(cartId, productsId);
+        }
+    }
+
+    const newCart = async() =>
+    {
+        const updatedCart = await grabUserCart(id);
+        setCart(updatedCart);
+
+    }
+
     return <div>
         <h3>Your Cart:</h3>
         {cart.length>0 ?
@@ -54,7 +87,8 @@ const Cart =({cart, setCart}) =>
                 return<div key={item.id}>
                     <h3>{item.product.name}</h3>
                     <img src={item.product.imageURL}></img>
-                    <p>Amount: <button>+</button>{item.quantity}<button>-</button></p>
+                    <p>Amount: <button onClick={() =>add(item.product.id, item.quantity, item.cartId, item.product.stock)}>+</button>{item.quantity}
+                     <button onClick={() => subtract(item.product.id, item.quantity, item.cartId)}>-</button></p>
                     <p>{item.quantity * item.product.price} copper coins</p>
                     <button onClick={() =>removeItem(item.cartId,item.product.id )}>X</button>
                 </div>

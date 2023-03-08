@@ -14,7 +14,6 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState({});
 
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
@@ -134,7 +133,7 @@ const App = ()=> {
         }
         <Route path= '/products' element={<Products products={products}/> }/>
         <Route path= '/products/:productsId' element={<SingleView/>}/>
-        <Route path = '/cart' element={<Cart cart={cart} setCart={setCart}/>} />
+        <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       </Routes>
     </div>
   );

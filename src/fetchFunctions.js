@@ -112,3 +112,24 @@ export const reduceStock = async(productsId, stock) =>
         return result;
     })
 }
+
+
+export const cartAmountUpdate = async(cartId, productsId, quantity) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    return fetch(`api/cartProducts/${cartId}/${productsId}`,
+    {
+        method: "PATCH",
+        headers:{
+            'Content-Type': "application/json",
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            quantity:`${quantity}`
+        })
+    }).then(responce => responce.json())
+    .then(result =>{
+        return result;
+    })
+}
