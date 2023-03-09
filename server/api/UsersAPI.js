@@ -45,6 +45,7 @@ router.get('/:userId/cart', async(req, res, next) =>{
         const auth = req.header('Authorization');
         if(auth)
         {
+            //check if the user matches
             const userCart = await getUserCart({userId:userId});
             res.send(userCart);
         }else{
@@ -72,7 +73,9 @@ router.get('/', async(req, res, next) =>
 
         if(auth && admin)
         {
-
+            //check logged in user
+            const allUsers = await getAllUsers();
+            res.send(allUsers)
         }
         else{
             res.status(403);
