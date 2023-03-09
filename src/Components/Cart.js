@@ -84,13 +84,19 @@ const Cart =({cart, setCart, id}) =>
         {cart.length>0 ?
             cart.map((item) =>
             {   
-                return<div key={item.id}>
-                    <h3>{item.product.name}</h3>
-                    <img src={item.product.imageURL}></img>
-                    <p>Amount: <button onClick={() =>add(item.product.id, item.quantity, item.cartId, item.product.stock)}>+</button>{item.quantity}
-                     <button onClick={() => subtract(item.product.id, item.quantity, item.cartId)}>-</button></p>
-                    <p>{item.quantity * item.product.price} copper coins</p>
-                    <button onClick={() =>removeItem(item.cartId,item.product.id )}>X</button>
+                return <div className="cart-container">
+                    <div className="cart-card" key={item.id}>
+                        <div className="cart-card-header"><p><b>{item.product.name}</b> <button className="remove-btn" onClick={() =>removeItem(item.cartId,item.product.id )}>X</button></p></div>
+                        
+                        <img src={item.product.imageURL}></img>
+                        <p>Amount: 
+                            <div className="quantity-container">
+                                <button className="quantity-btn" onClick={() => subtract(item.product.id, item.quantity, item.cartId)}>-</button>
+                                {item.quantity}<button className="quantity-btn" onClick={() =>add(item.product.id, item.quantity, item.cartId, item.product.stock)}>+</button>
+                        </div></p>
+                        <p>{item.quantity * item.product.price} copper coins</p>
+                        
+                    </div>
                 </div>
             })
         :null}
