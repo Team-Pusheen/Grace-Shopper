@@ -164,7 +164,6 @@ export const allUsers= (async(isAdmin) =>
         }
     }).then(responce => responce.json())
     .then(result =>{
-        console.log(result);
         return result;
     })
 })
