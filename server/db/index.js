@@ -4,7 +4,7 @@ const {
   getUserByToken,
   createUser,
   authenticate,
-  getUserByUsername
+  getUserByUsername,
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory} = require('./Categories')
@@ -220,6 +220,7 @@ console.log(item3);
  
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
+
 
 };
 

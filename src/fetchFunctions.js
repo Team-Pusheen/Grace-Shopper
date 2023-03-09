@@ -151,4 +151,7 @@ export const toCart = (async(cartId, productsId, quantity) =>
 
 })
 
-
+export const allUsers= (async() =>
+{
+    return fetch('/api/users')
+})

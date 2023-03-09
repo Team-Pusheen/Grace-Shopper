@@ -117,11 +117,34 @@ const getUserByUsername = async({username})=>
  }
 }
 
+const getAllUsers = async() =>
+{
+  try{
+    const SQL =`
+      SELECT *
+      FROM users
+    ;`
+
+    const {rows} = await client.query(SQL);
+
+    const finsihedList = rows.map((user) =>
+      {
+        delete user.password;
+        return user;
+      })
+      return finsihedList;
+  }catch(error)
+  {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   authenticate,
   getUserByToken,
   getUser,
   getUserById,
-  getUserByUsername
+  getUserByUsername,
+  getAllUsers
 };

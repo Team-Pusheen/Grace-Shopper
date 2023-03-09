@@ -5,6 +5,16 @@ const Admin = ({products, adminInfo})=>
 {
     const [userList, setUserList] = useState([]);
 
+    const getAllUsers = async() =>
+    {
+
+    }
+
+    if(!userList.length >0)
+    {
+        getAllUsers();
+    }
+
     return <div><h1>Welcome Admin {adminInfo.name}!</h1>
     <div id="AdminPage">
     {
