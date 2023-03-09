@@ -151,7 +151,20 @@ export const toCart = (async(cartId, productsId, quantity) =>
 
 })
 
-export const allUsers= (async() =>
+export const allUsers= (async(isAdmin) =>
 {
-    return fetch('/api/users')
+    const token = window.localStorage.getItem('token');
+
+    return fetch('/api/users', {
+        method: "GET",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        }
+    }).then(responce => responce.json())
+    .then(result =>{
+        console.log(result);
+        return result;
+    })
 })

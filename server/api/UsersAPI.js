@@ -74,6 +74,7 @@ router.get('/', async(req, res, next) =>
         if(auth && admin)
         {
             //check logged in user
+            
             const allUsers = await getAllUsers();
             res.send(allUsers)
         }

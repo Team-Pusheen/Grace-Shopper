@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { GiQuill } from "react-icons/gi";
+import { allUsers } from "../fetchFunctions";
 
 const Admin = ({products, adminInfo})=>
 {
@@ -7,7 +8,7 @@ const Admin = ({products, adminInfo})=>
 
     const getAllUsers = async() =>
     {
-
+        setUserList( await allUsers(adminInfo.isAdministrator));
     }
 
     if(!userList.length >0)
@@ -46,9 +47,26 @@ const Admin = ({products, adminInfo})=>
             
          </div>: null
         }
-        <div id="updateForms"><p>update forms go</p></div>
+        <div id="updateForms"><p>update forms go here</p></div>
         {
-            userList ? <h2>Users</h2>:null
+            userList ? 
+            <div>
+                <h2>Users</h2>
+                <div id="userList">
+                    {
+                        userList.map((user) =>
+                        {
+                            return<div key={user.id}>
+                                <ul>
+                                    <h3>Username: {user.username}</h3>
+                                    <li>Email: {user.email}</li>
+                                    <li>Admin Status: {user.isAdministrator}</li>
+                                </ul>
+                                </div>
+                        })
+                    }
+                </div>
+            </div>:null
         }
         </div>
     </div>
