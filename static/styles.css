@@ -230,3 +230,17 @@ nav a:hover {
   overflow: hidden;
   background: white;
 }
+
+/*---Admin Page---*/
+
+#AdminPage{
+  display: flex;
+  justify-content: space-around;
+}
+
+#productsList{
+  width: calc(100vw/3);
+  height: 600px;
+  overflow-y: scroll;
+}
+
