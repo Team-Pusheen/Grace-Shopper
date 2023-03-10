@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=VT323&display=swap');
 
 body {
   font-family: 'VT323', monospace;
   background-color: #e7e7db;
+  margin: 0;
 }
 
 form {
@@ -14,6 +15,12 @@ form > * {
   margin: 1rem;
 }
 
+.body-container {
+  margin-top: 55px;
+  position: relative;
+  min-height: 78.5vh;  
+}
+
 /*------ TITLE/LOGIN/REGISTER ------*/
 
 .top-container {
@@ -22,35 +29,66 @@ form > * {
   align-items: center;
 }
 
-h1 {
-  margin-left: 45%;
-  color: #609966;
-  font-size: 40px;
+.login-register {
+  letter-spacing: 2px;
+}
+
+.login-register a {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.logo-div a {
+  margin-right: 25px;
+  margin-left: 25px;
+  letter-spacing: 2px;
 }
 
 .login-btn {
   cursor: pointer;
   background-color: #AD8E70;
   color: white;
-  padding: 10px;
-  border-radius: 5px;
-  border-style: none;
-  margin-left: 10px;
+  padding: 10px 25px 10px 25px;
+  border: solid 2px #AD8E70;
+  border-radius: 20px;
   font-size: 20px;
   font-family: 'VT323', monospace;
+
+}
+
+.login-btn:hover {
+  color: #AD8E70;
+  background-color: white;
+  border: solid 2px #AD8E70;
 }
 
 /*------ NAV ------*/
 
 nav {
+  top: 0;
+  transition: top 0.3s;
+  position: fixed;
   display: flex;
-  justify-content: space-around;
+  z-index: 2;
+  width: 100%;
+  justify-content: space-between;
   background-color: white;
   padding: 8px;
-  border-radius: 15px;
   box-shadow: 2px 2px 2px 1px rgba(80, 80, 80, 0.149);
   font-size: 24px;
+  align-items: center;
+}
 
+.active {
+  text-decoration: none;
+  color: #DC0000;
+}
+
+nav p {
+  margin: 0;
+  color: #609966;
+  font-size: 25px;
+  font-family: 'MedievalSharp', cursive;
 }
 
 nav a {
@@ -62,18 +100,96 @@ nav a {
 nav a:hover {
   text-decoration: underline;
   color: #DC0000;
+}
 
+.logo {
+  width: 30px;
+  height: 30px;
+  margin-bottom: -6px;
+}
+
+.chest-closed {
+  width: 30px;
+  height: 30px;
+  margin-bottom: -9px;
+  margin-right: 20px;
+  transition: none;
+}
+
+/* .chest-closed:hover .chest-open {
+  display: inline;
+} */
+
+.chest-open {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-bottom: -9px;
+  margin-right: 40px;
+  transition: none;
+  display: none;
+}
+
+/*------ HOME ------*/
+.home-img {
+  /* background-image: url('https://ibb.co/L0bTLkc'); */
+  background-image: url('https://i.ibb.co/p1GHt0M/polar-engine-art-06.jpg');
+  height: 90vh;
+}
+
+.container {
+  width: 600px;
+  height: 230px;
+  margin: 200px 500px;
+  background: #00bfb6;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: absolute;
+  font-size: 22px;
+  box-shadow: 2px 5px 2px 5px rgba(32, 32, 32, 0.379);
+
+}
+
+/* .speech-bubble {
+  margin-top: 600px;
+} */
+
+.speech-bubble:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid #00bfb6;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #00bfb6;
+  border-bottom: 10px solid transparent;
+  left: 19px;
+  bottom: -19px;  
 }
 
 /*------- PRODUCT PAGE ------*/
 
-.cardContainer {
+.products-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.cardContainer {  
+  flex: 50%;
+  display: flex;
+  width: 1090px;
   justify-content: space-around;
   flex-wrap: wrap;
   margin-left: 60px;
   margin-right: 60px;
 }
+
 
 .card {
   border-radius: 15px;
@@ -86,6 +202,8 @@ nav a:hover {
 
 .card img {
   width: 100%;
+  min-height: 300px;
+  border-radius: 15px;
   transition: 0.3s all ease-in-out;
 }
 
@@ -96,4 +214,135 @@ nav a:hover {
 .card:hover {
   box-shadow: 2px 2px 5px 1px rgba(80, 80, 80, 0.25);
 
+}
+/*------- CART PAGE ------*/
+
+.cart-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 20px;
+}
+
+.cart-card {
+  border-radius: 15px; 
+  width: 450px;
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+  margin: 30px;
+  transition: 0.3s all ease-in-out;
+}
+
+.cart-card-header {
+  flex-direction: row;
+}
+
+.cart-card-header p {
+  font-size: 26px;
+  letter-spacing: 2px;
+}
+
+
+.remove-btn {
+  position: absolute;
+  border: solid 2px #c14040;
+  background-color: #c14040;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 5px 0 5px;
+  padding: 5 10px 5 10px; 
+  margin-left: 120px;
+  margin-top: -35px;
+}
+
+.remove-btn:hover {
+  background-color: white;
+  color:  #c14040;
+}
+
+.cart-card img {
+  width: 100%;
+  min-height: 300px;
+  border-radius: 15px;
+  transition: 0.3s all ease-in-out;
+}
+
+.quantity-container {
+  font-size: 20px;
+}
+
+.quantity-btn {
+  border: solid 2px #AD8E70;
+  background-color: #AD8E70;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px 0 5px;
+  padding: 5 10px 5 10px;
+}
+
+.quantity-btn:hover {
+  background-color: white;
+  color:  #AD8E70;
+}
+
+/*------- FOOTER ------*/
+.ft {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 2px 1px rgb(80 80 80 / 15%);
+}
+
+.footer-container {
+  display: flex;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height:5rem; 
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* .footer-container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  left: 50%; 
+  background-color: white;
+  border-radius: 50% / 30px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+ transform: translate(-50%,0);
+  border-radius: 0 0 100% 100%; 
+} 
+*/
+
+
+.footer-container .footer-card {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.footer-container .footer-card h1 {
+  margin: 0;
+  padding: 0;
+  color: grey;
+}
+
+.footer-card {
+  overflow: hidden;
+  background: white;
 }

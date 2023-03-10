@@ -41,7 +41,7 @@ const syncTables = async () => {
     price INTEGER NOT NULL,
     stock INTEGER NOT NULL,
     rarity INTEGER NOT NULL,
-    "imageURL" VARCHAR(250)  
+    "imageURL" VARCHAR(1500)  
   );
 
   CREATE TABLE carts(
@@ -113,7 +113,7 @@ const syncAndSeed = async () => {
       category: "weapon"
     }),
     createProduct({
-      name: "staff",
+      name: "Staff",
       description:
         "A simple wooden staff for novices. Also works as a walking stick",
       price: 20,
@@ -155,7 +155,7 @@ const syncAndSeed = async () => {
       price:560,
       stock:602,
       rarity:2,
-      imageURL: "https://static.wikia.nocookie.net/devilmaycry/images/9/91/Rebellion_DMC5.png/revision/latest?cb=20181028035650",
+      imageURL: "https://i.pinimg.com/originals/fe/97/90/fe9790423a874695d4773aec40289bf5.jpg",
       category: "weapon"
     })
   ])
@@ -167,9 +167,9 @@ const syncAndSeed = async () => {
 
 const [item1, item2, item3] = await Promise.all([
   addProduct({
-    productsId: 1,
+    productsId: 4,
     cartId: 1,
-    quantity: 4
+    quantity: 1
   }),
   addProduct({
     productsId: 2,
@@ -177,9 +177,9 @@ const [item1, item2, item3] = await Promise.all([
     quantity: 3
   }),
   addProduct({
-    productsId:2,
-    cartId:2,
-    quantity:4
+    productsId:3,
+    cartId:1,
+    quantity:1
   })
 ])
 console.log("--seeded cart products--");
@@ -220,7 +220,6 @@ console.log(item3);
  
  console.log("---all categories---");
  console.log(await getProductsByCategory({category:"tool"}))
-
 
 };
 

@@ -6,7 +6,7 @@ const Products =({products}) =>
     
     
        
-    return <div>{products ?<div>
+    return <div>{products ?<div className="products-container">
         <h2>Magical Wares</h2>
         <div className="cardContainer">
             {

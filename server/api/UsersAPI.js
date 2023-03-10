@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {createUser, getUserByUsername} = require("../db/User")
-const jwt = require('jsonwebtoken')
+const {createUser, getUserByUsername, getUserByToken} = require("../db/User");
+const {getUserCart} = require("../db/Carts");
+const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
 
 //create a user
@@ -37,12 +38,30 @@ router.post('/register', async(req, res, next) =>
 //get user's cart
 router.get('/:userId/cart', async(req, res, next) =>{
 
+    const {userId} = req.params;
+    
+    try{
+        const prefix = 'Bearer ';
+        const auth = req.header('Authorization');
+        if(auth)
+        {
+            const userCart = await getUserCart({userId:userId});
+            res.send(userCart);
+        }else{
+            res.status(403);
+            next({
+                name:"NotLoggedIn",
+                message:"The user is not logged in"
+            });
+        }
+
+        
+    }catch(error)
+    {
+        next(error);
+    }
+
 })
 
-//get user's information
-router.get('/userId/me', async(req, res, next) =>
-{
-    
-})
 
 module.exports = router;
