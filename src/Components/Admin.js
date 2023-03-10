@@ -1,10 +1,17 @@
 import React, {useState} from "react";
 import { GiQuill } from "react-icons/gi";
 import { allUsers } from "../fetchFunctions";
+import UpdateForm from "./UpdateForm";
 
 const Admin = ({products, adminInfo})=>
 {
     const [userList, setUserList] = useState([]);
+    const [editProduct, setEditProduct] =useState({});
+    
+    const canEdit = (product) =>
+    {
+        setEditProduct(product);
+    }
 
     const getAllUsers = async() =>
     {
@@ -30,13 +37,13 @@ const Admin = ({products, adminInfo})=>
                         return <div key={product.id} cla="productInfo">
                                 <ul>
                                     <h3>{product.name}</h3>
-                                    <button><GiQuill /></button>
+                                    <button onClick={() =>{canEdit(product)}}><GiQuill /></button>
                                     <ul>
                                         <li>Description: {product.description}</li>
                                         <li>Price: {product.price} copper coins</li>
                                         <li>Stock: {product.stock}</li>
                                         <li>Rarity: {product.rarity}</li>
-                                        <li>category: {product.category}</li>
+                                        <li>Category: {product.category}</li>
                                         <li>image UR: {product.imageURL}</li>
                                     </ul>
                                 </ul>
@@ -47,7 +54,7 @@ const Admin = ({products, adminInfo})=>
             
          </div>: null
         }
-        <div id="updateForms"><p>update forms go here</p></div>
+        <div id="updateForms">{editProduct.id ? <UpdateForm productInfo={editProduct} setEditProduct={setEditProduct}/>:null}</div>
         {
             userList ? 
             <div>
@@ -60,7 +67,7 @@ const Admin = ({products, adminInfo})=>
                                 <ul>
                                     <h3>Username: {user.username}</h3>
                                     <li>Email: {user.email}</li>
-                                    <li>Admin Status: {user.isAdministrator}</li>
+                                    {user.isAdministrator ?<li>Admin Status: True</li>:<li>Admin Status: False</li>}
                                 </ul>
                                 </div>
                         })

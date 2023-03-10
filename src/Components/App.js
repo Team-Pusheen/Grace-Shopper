@@ -8,7 +8,7 @@ import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
 import Admin from './Admin';
-import { Link, NavLink, Routes, Route } from 'react-router-dom';
+import { Link, NavLink, Routes, Route, useNavigate } from 'react-router-dom';
 import { GiSwordman, GiOpenChest, GiLockedChest } from 'react-icons/gi'
 
 
@@ -17,6 +17,8 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+
+  const navigate = useNavigate();
 
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
@@ -67,6 +69,7 @@ const App = ()=> {
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
+    navigate("/login");
   }
 
   const login = async({ username, password})=> {

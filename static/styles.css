@@ -244,3 +244,8 @@ nav a:hover {
   overflow-y: scroll;
 }
 
+#userList{
+  width: calc(100vw/3);
+  height: 600px;
+  overflow-y: scroll;
+}
