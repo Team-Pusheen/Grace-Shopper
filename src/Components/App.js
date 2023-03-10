@@ -7,6 +7,7 @@ import Cart from './Cart';
 import {getProducts} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import { Link, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
@@ -53,6 +55,8 @@ const App = ()=> {
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
+    // redirect to login page
+   navigate('/login')
   }
 
   const login = async({ username, password})=> {
