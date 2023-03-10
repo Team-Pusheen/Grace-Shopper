@@ -72,10 +72,10 @@ async function getAllProducts(){
 // GET PRODUCTS BY ID -> GET /api/products/:productId
 async function getProductById({id}) {
   const SQL =`
-  SELECT *
+  SELECT products.*, category
   FROM products
-  JOIN categories ON products.id = categories."productsId" 
-  WHERE id = $1
+  JOIN categories ON products.id = categories."productsId"
+  WHERE products.id = $1
 ;`
 const { rows } = await client.query(SQL,[id]);
 const response = await attachReviews(rows);
@@ -106,6 +106,7 @@ async function attachReviews(productArray) {
      const reviews = await getReviewsByProductId({productsId: product.id})
      if (reviews) {
       product.reviews = reviews
+      delete product.productsId;
      }
      return product
   })

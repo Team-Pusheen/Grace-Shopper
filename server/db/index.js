@@ -222,7 +222,7 @@ console.log(item3);
  console.log(await getProductsByCategory({category:"tool"}))
 
 console.log("--get product by Id--");
-//console.log(await getProductById({id:1}));
+console.log(await getProductById({id:2}));
 };
 
 
