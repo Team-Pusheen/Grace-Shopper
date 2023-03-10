@@ -3,7 +3,7 @@ import React, {useState} from "react";
 const UpdateForm =({productInfo, setEditProduct}) =>
 { 
     const [name, setName] = useState(productInfo.name); 
-    const [desc, setDesc] = useState(productInfo.desc);
+    const [desc, setDesc] = useState(productInfo.description);
     const [price, setPrice] = useState(productInfo.price);
     const [stock, setStock] = useState(productInfo.stock);
     const [Rarity, setRarity] = useState(productInfo.rarity);

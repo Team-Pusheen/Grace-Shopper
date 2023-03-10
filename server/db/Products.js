@@ -58,6 +58,7 @@ async function getAllProducts(){
     const { rows } = await client.query(
       `SELECT *
       FROM products
+      JOIN categories ON products.id = categories."productsId"
       ;`
     );
     const response = await attachReviews(rows);
@@ -73,6 +74,7 @@ async function getProductById({id}) {
   const SQL =`
   SELECT *
   FROM products
+  JOIN categories ON products.id = categories."productsId" 
   WHERE id = $1
 ;`
 const { rows } = await client.query(SQL,[id]);
