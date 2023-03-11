@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import {toCart, grabUserCart, cartAmountUpdate } from "../fetchFunctions";
 
-const SingleView = ({ products }) => {
+
+const SingleView = ({ products, cartId, setCart, cart, userId }) => { 
   const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
   const { productsId } = useParams();
   const id = productsId.slice(1);
   const product = products.find((product) => product.id == id * 1);
-  if (!product) {
-    return null;
-  }
+ 
 
-  const addToCart = (e) => {
+  useEffect(()=>{
+    const updateCart = async()  => {
+      const userCart = await grabUserCart(userId);
+      setCart(userCart);
+    }
+    updateCart();
+  },[cartItems])
+
+  const addToCart = async (e) => {
     e.preventDefault();
-    setCartItems([...cartItems, product]);
+    const itemExists = cart.find((item) => item.product.id === product.id);
+    console.log(itemExists);
+    if (itemExists) {
+      const updateItem = await cartAmountUpdate(cartId, id, itemExists.quantity + 1)
+      setCartItems(updateItem)
+    } else {
+   const newAddedItem = await toCart ( cartId, id, 1);
+    setCartItems([...cart, newAddedItem]);
+  }
   }
 
   return ( product ?
@@ -39,8 +56,7 @@ const SingleView = ({ products }) => {
         <b>category: </b>
         {product.category}
       </p>
-      <form onSubmit={addToCart}  > <button>add to cart</button> </form>
-      <button>add to cart</button>
+      <form onSubmit={addToCart}  > <button>add to cart</button> </form> 
     </div>
     : null
   );

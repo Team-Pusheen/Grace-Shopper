@@ -32,9 +32,11 @@ const createUser = async ({
 const getUserByToken = async (token) => {
   const payload = await jwt.verify(token, JWT);
   const SQL = `
-    SELECT users.*
+    SELECT users.*, carts.id AS "cartId"
     FROM users
-    WHERE id = $1 
+    LEFT JOIN carts
+    ON users.id = carts."userId"
+    WHERE users.id = $1
   `;
   const response = await client.query(SQL, [payload.id]);
   if (!response.rows.length) {
@@ -43,6 +45,7 @@ const getUserByToken = async (token) => {
     throw error;
   }
   const user = response.rows[0];
+  
   delete user.password;
   return user;
 };

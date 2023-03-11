@@ -13,10 +13,12 @@ import { GiSwordman, GiOpenChest, GiLockedChest } from 'react-icons/gi'
 
 
 
+
 const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ const App = ()=> {
       .then( response => response.json())
       .then( user => {
         setAuth(user)
+        console.log(user);
       });
     }
   };
@@ -69,7 +72,10 @@ const App = ()=> {
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
-    navigate("/login");
+
+    // redirect to login page
+   navigate('/login')
+
   }
 
   const login = async({ username, password})=> {
@@ -143,7 +149,7 @@ const App = ()=> {
           )
         }
         <Route path= '/products' element={<Products products={products}/> }/>
-        <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
+        <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
       {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth}/>}/>:null}
