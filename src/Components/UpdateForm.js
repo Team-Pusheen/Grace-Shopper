@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const UpdateForm =({productInfo, setEditProduct}) =>
+const UpdateForm =({productInfo, setEditProduct, isAdmin}) =>
 { 
     const [name, setName] = useState(productInfo.name); 
     const [desc, setDesc] = useState(productInfo.description);

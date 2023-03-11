@@ -2,15 +2,22 @@ import React, {useState} from "react";
 import { GiQuill } from "react-icons/gi";
 import { allUsers } from "../fetchFunctions";
 import UpdateForm from "./UpdateForm";
+import AddProduct from "./AddProduct";
 
 const Admin = ({products, adminInfo})=>
 {
     const [userList, setUserList] = useState([]);
     const [editProduct, setEditProduct] =useState({});
+    const [canAdd, setCanAdd] = useState(false);
     
     const canEdit = (product) =>
     {
         setEditProduct(product);
+    }
+
+    const add = () =>
+    {
+        setCanAdd(true);
     }
 
     const getAllUsers = async() =>
@@ -28,7 +35,7 @@ const Admin = ({products, adminInfo})=>
     {
        products ? <div>
                 <h2>Products</h2>
-                
+                <button onClick={add}>Add Product</button>
                 {
                    <div id="productsList">
                     {
@@ -54,7 +61,9 @@ const Admin = ({products, adminInfo})=>
             
          </div>: null
         }
-        <div id="updateForms">{editProduct.id ? <UpdateForm productInfo={editProduct} setEditProduct={setEditProduct}/>:null}</div>
+        <div id="updateForms">{editProduct.id && canAdd===false ? <UpdateForm productInfo={editProduct} isAdmin={adminInfo.isAdministrator} setEditProduct={setEditProduct}/>:null}
+        {canAdd ? <AddProduct isAdmin={adminInfo.isAdministrator}/>:null}
+        </div>
         {
             userList ? 
             <div>

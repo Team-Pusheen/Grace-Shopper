@@ -167,3 +167,27 @@ export const allUsers= (async(isAdmin) =>
         return result;
     })
 })
+
+
+export const addProductToStock = (async(isAdmin) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    return fetch('/api/products/', {
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        },
+        body:
+        {
+
+        }
+    }).then(responce =>responce.json())
+    .then(result =>
+        {
+            console.log(result);
+            return result;
+        })
+})
