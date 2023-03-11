@@ -74,7 +74,10 @@ router.get('/', async(req, res, next) =>
         if(auth && admin)
         {
             //check logged in user
+            const token = auth.slice(prefix.length);
+            const currentUser = jwt.verify(token, JWT);
             
+
             const allUsers = await getAllUsers();
             res.send(allUsers)
         }

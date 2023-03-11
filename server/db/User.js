@@ -139,6 +139,7 @@ const getAllUsers = async() =>
   }
 }
 
+
 module.exports = {
   createUser,
   authenticate,
