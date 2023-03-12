@@ -17,6 +17,7 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const [productChange, setProductChange] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,11 +46,12 @@ const App = ()=> {
     {
       const allProducts = await getProducts()
       setProducts(allProducts);
+      setProductChange(false);
     }
     grabProducts();
        
 
-  }, []);
+  }, [productChange]);
 
   useEffect(() =>
   {    
@@ -146,7 +148,7 @@ const App = ()=> {
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
-      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth}/>}/>:null}
+      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth} setProductChange={setProductChange}/>}/>:null}
       </Routes> 
       </div>
       <Footer />

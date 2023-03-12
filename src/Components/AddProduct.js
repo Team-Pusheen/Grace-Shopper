@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { addProductToStock } from "../fetchFunctions";
 
-const AddProduct =({isAdmin, setCanAdd, canAdd}) =>
+const AddProduct =({isAdmin, setCanAdd, canAdd, setProductChange}) =>
 {
     const [name, setName] = useState(""); 
     const [desc, setDesc] = useState("");
@@ -18,6 +18,7 @@ const AddProduct =({isAdmin, setCanAdd, canAdd}) =>
         {
             const newProduct = await addProductToStock(isAdmin, name, desc, price, stock, Rarity, image, category);
             setCanAdd(false);
+            setProductChange(true);
         }
         
     }

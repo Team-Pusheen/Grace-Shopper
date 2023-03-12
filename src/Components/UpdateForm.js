@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const UpdateForm =({productInfo, setEditProduct, isAdmin}) =>
+const UpdateForm =({productInfo, setEditProduct, isAdmin, setProductChange}) =>
 { 
     const [name, setName] = useState(productInfo.name); 
     const [desc, setDesc] = useState(productInfo.description);
@@ -13,6 +13,7 @@ const UpdateForm =({productInfo, setEditProduct, isAdmin}) =>
     const goUpdate = async(ev) =>
     {
         ev.preventDefault();
+        setProductChange(true);
         
     }
 
