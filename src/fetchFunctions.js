@@ -1,3 +1,5 @@
+import { response } from "express";
+
 export const getProducts = (async() =>{
     
    return fetch('/api/products',{
@@ -209,6 +211,18 @@ export const removeProduct = async(pId, isAdmin) =>
             'Administrator': `${isAdmin}`
         }
     }).then(responce => responce.json())
+    .then(result =>{
+        console.log(result);
+        return result;
+    })
+}
+
+//get all the categories
+export const getCategoriesList = async() =>
+{
+    return fetch("/api/categories", {
+        method:"GET",
+    }).then(response => response.json())
     .then(result =>{
         console.log(result);
         return result;

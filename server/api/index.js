@@ -21,6 +21,10 @@ router.use("/products", productsRouter);
 const usersRouter = require("./UsersAPI");
 router.use("/users",usersRouter);
 
+//router for categories
+const categoryRouter = require("./CategoriesAPI");
+router.use("/categories", categoryRouter);
+
 //custom error handling
 router.use((error, req, res, next) =>{
     res.send({

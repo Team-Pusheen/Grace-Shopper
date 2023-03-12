@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts, grabUserCart} from "../fetchFunctions"
+import {getProducts, grabUserCart, /*getCategoriesList*/} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
 import Admin from './Admin';
@@ -18,6 +18,7 @@ const App = ()=> {
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
   const [productChange, setProductChange] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -67,6 +68,15 @@ const App = ()=> {
       getCart();
     }
   },[auth])
+
+/*useEffect(() =>{
+  const grabCategories = async() =>
+  {
+    const cList = await getCategoriesList();
+    setCategoryList(cList);
+  }
+  //grabCategories();
+},[])*/
 
   const logout = ()=> {
     window.localStorage.removeItem('token');
