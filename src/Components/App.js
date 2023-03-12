@@ -97,7 +97,7 @@ const App = ()=> {
   };
 
   return (
-    <div>  
+    <div className='wrap'>  
       <nav>
         <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
         <div className="top-container">

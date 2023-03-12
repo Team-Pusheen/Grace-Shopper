@@ -86,26 +86,30 @@ const Cart =({cart, setCart, id}) =>
             {   
                 return <div className="cart-container">
                     <div className="cart-card" key={item.id}>
-                    <img src={item.product.imageURL}></img>
-                        <div className='cart-description'>
-                        <div className="cart-card-header"><p><b>{item.product.name}</b> </p></div>
-                        <p>Amount: 
-                            <div className="quantity-container">
+                    <img className='cart-card-item' src={item.product.imageURL}></img>
+                        <div className='cart-card-item' id='cart-description'>
+                        <div id='cart-card-header'><p><b>{item.product.name}</b> </p></div>
+                        <div id='quantity-container'>                        
+                            <p>Amount: 
                                 <button className="quantity-btn" onClick={() => subtract(item.product.id, item.quantity, item.cartId)}>-</button>
                                 {item.quantity}<button className="quantity-btn" onClick={() =>add(item.product.id, item.quantity, item.cartId, item.product.stock)}>+</button>
-                        </div></p>
-                        <p>{item.quantity * item.product.price} copper coins</p>
+                                <p>{item.quantity * item.product.price} copper coins</p>
+                            </p>
                         </div>
-                        <button className="remove-btn" onClick={() =>removeItem(item.cartId,item.product.id )}>X</button>
+                        
+                        
+                        </div>
+                        <button id='remove-btn' onClick={() =>removeItem(item.cartId,item.product.id )}>X</button>
                     </div>
                 </div>
 
             })
         :null}
         {cart.length >0 ? 
-        <>
+        <div className="cart-checkout">
         <h2>Total: {totalPrice} copper coins</h2>
-        <button onClick={purchase}>Purchase Wares</button></>
+        <button className="purchase-btn" onClick={purchase}>Purchase Wares</button>
+        </div>
         :<button disabled>Purchase Wares</button>}
         {purchaseMade ? <h1>Thank you for your patronage! (=^-ω-^=)</h1>:null}
     </div>

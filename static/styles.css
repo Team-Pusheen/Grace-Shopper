@@ -14,11 +14,15 @@ form {
 form > * {
   margin: 1rem;
 }
+/* .wrap {
+  min-height: 100vh;
+} */
 
 .body-container {
   margin-top: 55px;
-  position: relative;
-  min-height: 78.5vh;  
+  overflow: auto;
+  height: auto;
+  padding-bottom: 180px;
 }
 
 /*------ TITLE/LOGIN/REGISTER ------*/
@@ -128,6 +132,59 @@ nav a:hover {
   margin-right: 40px;
   transition: none;
   display: none;
+}
+
+/*------ LOGIN/REGISTER ------*/
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 15px;
+  margin: 100px;
+  justify-content: space-between;
+}
+
+.login-card > * { 
+text-align: center;
+  margin-bottom: 30px;
+}
+
+
+
+.login-card input {
+  width: 320px;
+  padding: 10px 10px;
+  margin: 10px;
+  margin-bottom: 30px;
+
+  border: none;
+  border-radius: 5px;
+}
+
+.login-card input {
+  outline: none;
+  border-bottom: 1px solid #609966;
+}
+
+
+.login-signup-btn {
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  font-family: 'VT323', monospace;
+  background-color:  #609966;
+  border: solid 2px  #609966;
+  font-size: 25px;
+}
+
+.login-signup-btn:hover {
+ cursor: pointer;
+ border: solid 2px  #609966;
+ color: #609966;
+ background-color: white;
+
 }
 
 /*------ HOME ------*/
@@ -240,13 +297,24 @@ nav a:hover {
 /*------- CART PAGE ------*/
 
 
+.full-cart-container {  
+  display: flex;
+  margin: 60px;
+  height: 75vh;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+  border-radius: 15px;
+}
+
+
 .cart-container {
   display: flex;
   font-size: 20px;
-  width: 90vw;
 }
 
 .cart-card {
+  max-width: 100%;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -254,33 +322,39 @@ nav a:hover {
   transition: 0.3s all ease-in-out;
   width: 200%;
   max-height: 200px;
+
   border-bottom: solid 1px gray;
 }
 
-.cart-card-header {
+#cart-card-header {
   flex-direction: row;
 }
 
-.cart-card-header p {
+#cart-card-header p {
   font-size: 26px;
   letter-spacing: 2px;
 }
 
+.cart-card-item {
+  margin-left: 50px;
+}
 
-.remove-btn {
+#remove-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
   height: 30px;
   border: solid 2px #c14040;
   background-color: #c14040;
   color: white;
   border-radius: 8px;
   cursor: pointer;
-  margin: 0 5px 0 5px;
   padding: 5 10px 5 10px; 
   /* margin-left: 120px;
   margin-top: -35px; */
 }
 
-.remove-btn:hover {
+#remove-btn:hover {
   background-color: white;
   color:  #c14040;
 }
@@ -291,8 +365,9 @@ nav a:hover {
   transition: 0.3s all ease-in-out;
 }
 
-.quantity-container {
+#quantity-container {
   font-size: 20px;
+  flex-direction: column;
 }
 
 .quantity-btn {
@@ -310,8 +385,35 @@ nav a:hover {
   color:  #AD8E70;
 }
 
+.cart-checkout {
+  margin-top: 70px;
+}
+
+.purchase-btn {
+  padding: 20px;
+  width: 100%;
+  border-radius: 15px;
+  color: white;
+  font-family: 'VT323', monospace;
+  background-color:  #609966;
+  border: solid 2px  #609966;
+  font-size: 25px;
+}
+
+.purchase-btn:hover {
+ cursor: pointer;
+ border: solid 2px  #609966;
+ color: #609966;
+ background-color: white;
+
+}
+
+
 /*------- FOOTER ------*/
 .footer-container {
+  bottom:0;  
+  margin-top: -180px;
+  height: 180px;
   background-color: rgb(57, 57, 57);
   display: flex;
   flex-direction: column;
