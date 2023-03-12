@@ -137,6 +137,28 @@ const changeStockOfProduct = async ({productsId, stock}) =>
 }
 
 
+//edit entire product
+const editProduct = async ({id ,name, description, rarity, stock, price, imageURL}) =>
+{
+  try {
+    const SQL =  `
+    UPDATE products
+    SET name=$2, desription=$3, rarity=$4, stock=$5, price=$7, "imageURL"=$8
+    WHERE id = $1
+    ;`
+    const {rows} = await client.query(SQL,[id, name, description, rarity, stock, price, imageURL])
+    return rows
+    
+  } catch (error) {
+    throw error
+  }
+}
+ 
+
+
+
+
+
 module.exports = {
   createProduct,
   deleteProduct,
@@ -144,5 +166,6 @@ module.exports = {
   getProductById,
   getProductsByCategory,
   attachReviews,
-  changeStockOfProduct
+  changeStockOfProduct,
+  editProduct
 };
