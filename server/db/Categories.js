@@ -36,7 +36,13 @@ const getAllCategories = async() =>
     ;`
 
     const {rows} = await client.query(SQL);
-    return rows;
+
+    const categoryArray = rows.map((category) =>
+    {
+        return category.category;
+    })
+
+    return categoryArray;
 }
 
 module.exports ={
