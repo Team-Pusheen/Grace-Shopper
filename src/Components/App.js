@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts, grabUserCart, /*getCategoriesList*/} from "../fetchFunctions"
+import {getProducts, grabUserCart, getCategoriesList} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
 import Admin from './Admin';
@@ -69,14 +69,14 @@ const App = ()=> {
     }
   },[auth])
 
-/*useEffect(() =>{
+useEffect(() =>{
   const grabCategories = async() =>
   {
     const cList = await getCategoriesList();
     setCategoryList(cList);
   }
-  //grabCategories();
-},[])*/
+  grabCategories();
+},[])
 
   const logout = ()=> {
     window.localStorage.removeItem('token');
