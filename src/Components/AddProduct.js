@@ -1,6 +1,7 @@
 import React, {useState} from "react";
+import { addProductToStock } from "../fetchFunctions";
 
-const AddProduct =({isAdmin}) =>
+const AddProduct =({isAdmin, setCanAdd, canAdd}) =>
 {
     const [name, setName] = useState(""); 
     const [desc, setDesc] = useState("");
@@ -12,11 +13,22 @@ const AddProduct =({isAdmin}) =>
 
     const goAdd = async(ev) =>
     {
+        ev.preventDefault();
+        if(name && desc && price && stock && Rarity && category)
+        {
+            const newProduct = await addProductToStock(isAdmin, name, desc, price, stock, Rarity, image, category);
+            setCanAdd(false);
+        }
+        
+    }
 
+    if(canAdd ===false)
+    {
+        return null;
     }
 
     return<div>
-    <h2>Update Item</h2>
+    <h2>Create New Product</h2>
     <form onSubmit={goAdd}>
         <>
         <label>Name:</label>
@@ -24,19 +36,19 @@ const AddProduct =({isAdmin}) =>
         </>
         <>
         <label>Description:</label>
-        <input placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></input>
+        <textarea placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></textarea>
         </>
         <>
         <label>Price:</label>
-        <input placeholder="price in copper coins" value={price} onChange={ev =>{setPrice(ev.target.value)}}></input>
+        <input placeholder="price in copper coins" value={price} type="number" onChange={ev =>{setPrice(ev.target.value)}}></input>
         </>
         <>
         <label>Stock:</label>
-        <input placeholder="stock count" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
+        <input placeholder="stock count" type="number" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
         </>
         <>
         <label>Rarity:</label>
-        <input placeholder="rarity" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
+        <input placeholder="rarity" type="number" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
         </>
         <>
         <label>Category:</label>
@@ -48,7 +60,7 @@ const AddProduct =({isAdmin}) =>
         </>
         <button>Save</button>
     </form>
-    <button onClick={ev =>setEditProduct({})}>Cancel</button>
+    <button onClick={ev =>setCanAdd(false)}>Cancel</button>
 </div>
 
 

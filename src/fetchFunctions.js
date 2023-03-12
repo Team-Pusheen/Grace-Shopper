@@ -169,7 +169,7 @@ export const allUsers= (async(isAdmin) =>
 })
 
 
-export const addProductToStock = (async(isAdmin) =>
+export const addProductToStock = (async(isAdmin, name, description, price, stock, rarity, imageURL, category) =>
 {
     const token = window.localStorage.getItem('token');
 
@@ -180,14 +180,37 @@ export const addProductToStock = (async(isAdmin) =>
             'Authorization': `Bearer ${token}`,
             'Administrator': `${isAdmin}`
         },
-        body:
-        {
-
-        }
+        body: JSON.stringify({
+            name: `${name}`,
+            description: `${description}`,
+            price: `${price}`,
+            stock: `${stock}`,
+            rarity: `${rarity}`,
+            imageURL: `${imageURL}`,
+            category: `${category}`
+        })
     }).then(responce =>responce.json())
     .then(result =>
         {
-            console.log(result);
             return result;
         })
 })
+
+
+export const removeProduct = async(pId, isAdmin) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    return fetch(`/api/products/${pId}`,{
+        method: "DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        }
+    }).then(responce => responce.json())
+    .then(result =>{
+        console.log(result);
+        return result;
+    })
+}

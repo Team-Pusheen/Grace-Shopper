@@ -30,19 +30,19 @@ const UpdateForm =({productInfo, setEditProduct, isAdmin}) =>
             </>
             <>
             <label>Description:</label>
-            <input placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></input>
+            <textarea placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></textarea>
             </>
             <>
             <label>Price:</label>
-            <input placeholder="price in copper coins" value={price} onChange={ev =>{setPrice(ev.target.value)}}></input>
+            <input placeholder="price in copper coins" type="number" value={price} onChange={ev =>{setPrice(ev.target.value)}}></input>
             </>
             <>
             <label>Stock:</label>
-            <input placeholder="stock count" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
+            <input placeholder="stock count" type="number" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
             </>
             <>
             <label>Rarity:</label>
-            <input placeholder="rarity" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
+            <input placeholder="rarity" type="number" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
             </>
             <>
             <label>Category:</label>
