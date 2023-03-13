@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {getAllProducts, getProductsByCategory} = require("../db")
-const {getProductById, createProduct, changeStockOfProduct, deleteProduct} = require("../db/Products");
+const {getProductById, createProduct, changeStockOfProduct, deleteProduct, editProduct} = require("../db/Products");
 const jwt = require('jsonwebtoken')
 const JWT = process.env.JWT;
 
@@ -46,13 +46,13 @@ router.post('/', async(req,res,next) =>
     try{
         const prefix = 'Bearer ';
         const auth = req.header('Authorization');
-        //ask about how to handle administrator check.
-        //const {isAdministrator} = req.body;
+        const admin = req.header('Administrator');
+        
 
-        if(auth)
+        if(auth && admin)
         {
             const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            
 
             const {name, description, price, stock, rarity, imageURL, category} = req.body
             const newProduct = await createProduct({name:name, description:description, price:price, stock:stock, rarity:rarity, imageURL:imageURL, category:category});
@@ -76,26 +76,23 @@ router.patch('/:productsId', async(req, res, next) =>{
     try{
         const prefix = 'Bearer ';
         const auth = req.header('Authorization');
-        //ask about how to handle administrator check.
-        //const {isAdministrator} = req.body;
-
-        if(auth)
+        const admin = req.header('Administrator');        
+        if(auth && admin)
         {
             const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
-
-            if(user)
-            {
+            
                 const {productsId} = req.params;
                 const {name, description, price, stock, rarity, imageURL, category} = req.body
-            }else{
-                next({
-                    name:"NotAnAdmin",
-                    message:"The user is not an Admin"
-                })
-            }
+                const changedProduct = await editProduct({id:productsId, name:name, description:description, price:price, stock:stock, rarity:rarity, imageURL:imageURL, category:category});
+                res.send(changedProduct);
+            
         }else{
+            res.status(403);
 
+            next({
+                name:"NotAdmin",
+                message: "This user is not a Admin."
+            })
         }
 
     }catch(error)
@@ -109,10 +106,10 @@ router.delete('/:productsId', async(req, res, next) =>{
     try{
         const prefix = 'Bearer ';
         const auth = req.header('Authorization');
-        //ask about how to handle administrator check.
-        //const {isAdministrator} = req.body;
+        const admin = req.header('Administrator');
+        
 
-        if(auth)
+        if(auth && admin)
         {
             const token = auth.slice(prefix.length);
             const user = jwt.verify(token, JWT);

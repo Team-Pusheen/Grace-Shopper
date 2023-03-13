@@ -229,7 +229,29 @@ export const getCategoriesList = async() =>
     })
 }
 
-export const updateProduct = async() =>
+export const updateProduct = async(isAdmin, id, name, desc, price, stock, rarity, image, category) =>
 {
-    //return fetch
+    const token = window.localStorage.getItem('token');
+
+    return fetch(`/api/products/${id}`,{
+        method: "PATCH",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        },
+        body: JSON.stringify({
+            name: `${name}`,
+            description: `${desc}`,
+            price: `${price}`,
+            stock: `${stock}`,
+            rarity: `${rarity}`,
+            imageURL: `${image}`,
+            category: `${category}`
+        })
+    }).then(responce => responce.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
 }
