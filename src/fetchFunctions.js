@@ -136,6 +136,7 @@ export const cartAmountUpdate = async(cartId, productsId, quantity) =>
 
 export const toCart = (async(cartId, productsId, quantity) =>
 {
+    const token = window.localStorage.getItem('token')
     return fetch(`api/cartProducts/${cartId}/${productsId}`, {
         method: "POST",
         headers:{
