@@ -154,11 +154,11 @@ useEffect(() =>{
             </>
           )
         }
-        <Route path= '/products' element={<Products products={products}/> }/>
+        <Route path= '/products' element={<Products products={products} categoryList={categoryList}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products}/>}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
-      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth} setProductChange={setProductChange}/>}/>:null}
+      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin categoryList={categoryList} products={products} adminInfo={auth} setProductChange={setProductChange}/>}/>:null}
       </Routes> 
       </div>
       <Footer />

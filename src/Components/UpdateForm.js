@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const UpdateForm =({productInfo, setEditProduct, isAdmin, setProductChange}) =>
+const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProductChange}) =>
 { 
     const [name, setName] = useState(productInfo.name); 
     const [desc, setDesc] = useState(productInfo.description);
@@ -9,12 +9,25 @@ const UpdateForm =({productInfo, setEditProduct, isAdmin, setProductChange}) =>
     const [Rarity, setRarity] = useState(productInfo.rarity);
     const [category, setCategory] = useState(productInfo.category);
     const [image, setImage] = useState(productInfo.imageURL);
+    const [newCategory, setNewCategory] = useState("");
 
     const goUpdate = async(ev) =>
     {
         ev.preventDefault();
+        if(newCategory)
+        {
+
+        }
+        else{
+
+        }
         setProductChange(true);
         
+    }
+    
+    if(!categoryList.includes("Other"))
+    {
+        categoryList.push("Other");
     }
 
     if(!productInfo.id)
@@ -46,8 +59,16 @@ const UpdateForm =({productInfo, setEditProduct, isAdmin, setProductChange}) =>
             <input placeholder="rarity" type="number" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
             </>
             <>
-            <label>Category:</label>
-            <input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>
+            <label htmlFor="category-names">Category:</label>
+            <select value={category} onChange={ev =>{setCategory(ev.target.value)}} name="category-names">
+                {
+                    categoryList.map((category, idx) =>{
+                        return <option key={idx} value={category}>{category}</option>
+                    })
+                }
+            </select>
+            {category === "Other" ? <input placeholder="new Category" value={newCategory} onChange={ev =>{setNewCategory(ev.target.value)}}></input>:null}
+            {/*<input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>*/}
             </>
             <>
             <label>Image Link:</label>

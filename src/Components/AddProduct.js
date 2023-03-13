@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { addProductToStock } from "../fetchFunctions";
 
-const AddProduct =({isAdmin, setCanAdd, canAdd, setProductChange}) =>
+const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange}) =>
 {
     const [name, setName] = useState(""); 
     const [desc, setDesc] = useState("");
@@ -26,6 +26,12 @@ const AddProduct =({isAdmin, setCanAdd, canAdd, setProductChange}) =>
     if(canAdd ===false)
     {
         return null;
+    }
+
+    if(!categoryList.includes("----") && !categoryList.includes("other"))
+    {
+        categoryList.unshift("----");
+        categoryList.push("Other");
     }
 
     return<div>

@@ -1,4 +1,3 @@
-import { response } from "express";
 
 export const getProducts = (async() =>{
     
@@ -227,4 +226,9 @@ export const getCategoriesList = async() =>
         console.log(result);
         return result;
     })
+}
+
+export const updateProduct = async() =>
+{
+    //return fetch
 }

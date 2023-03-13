@@ -4,7 +4,7 @@ import { allUsers, removeProduct} from "../fetchFunctions";
 import UpdateForm from "./UpdateForm";
 import AddProduct from "./AddProduct";
 
-const Admin = ({products, adminInfo, setProductChange})=>
+const Admin = ({categoryList, products, adminInfo, setProductChange})=>
 {
     const [userList, setUserList] = useState([]);
     const [editProduct, setEditProduct] =useState({});
@@ -75,8 +75,8 @@ const Admin = ({products, adminInfo, setProductChange})=>
             
          </div>: null
         }
-        <div id="updateForms">{editProduct.id && canAdd===false ? <UpdateForm productInfo={editProduct} isAdmin={adminInfo.isAdministrator} setEditProduct={setEditProduct} setProductChange={setProductChange}/>:null}
-        {canAdd ? <AddProduct isAdmin={adminInfo.isAdministrator} setCanAdd={setCanAdd} canAdd={canAdd} setProductChange={setProductChange}/>:null}
+        <div id="updateForms">{editProduct.id && canAdd===false ? <UpdateForm categoryList={categoryList} productInfo={editProduct} isAdmin={adminInfo.isAdministrator} setEditProduct={setEditProduct} setProductChange={setProductChange}/>:null}
+        {canAdd ? <AddProduct categoryList={categoryList} isAdmin={adminInfo.isAdministrator} setCanAdd={setCanAdd} canAdd={canAdd} setProductChange={setProductChange}/>:null}
         </div>
         {
             userList ? 
