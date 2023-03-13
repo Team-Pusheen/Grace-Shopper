@@ -110,7 +110,7 @@ const Cart =({cart, setCart, id}) =>
         <h2>Total: {totalPrice} copper coins</h2>
         <button className="purchase-btn" onClick={purchase}>Purchase Wares</button>
         </div>
-        :<button disabled>Purchase Wares</button>}
+        :<button className="purchase-btn" disabled >Purchase Wares</button>}
         {purchaseMade ? <h1>Thank you for your patronage! (=^-ω-^=)</h1>:null}
     </div>
 }

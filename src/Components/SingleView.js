@@ -33,30 +33,36 @@ const SingleView = ({ products, cartId, setCart, cart, userId }) => {
   }
 
   return ( product ?
-    <div>
-      <h1>{product.name}</h1>
-      <img src={product.imageURL} />
-      <p>
-        <b>description: </b>
-        {product.description}
-      </p>
-      <p>
-        <b>price: </b>
-        {product.price}
-      </p>
-      <p>
-        <b>stock: </b>
-        {product.stock}
-      </p>
-      <p>
-        <b>rarity: </b>
-        {product.rarity}
-      </p>
-      <p>
-        <b>category: </b>
-        {product.category}
-      </p>
-      <form onSubmit={addToCart}  > <button>add to cart</button> </form> 
+    <div className="product-wrapper">
+      <div className="single-product-container">
+        <div className="single-product-card">
+          <div className="product-header">
+            <h1>{product.name}</h1>
+            <img src={product.imageURL} />
+          </div>
+          <p>
+            <b>description: </b>
+            {product.description}
+          </p>
+          <p>
+            <b>price: </b>
+            {product.price}
+          </p>
+          <p>
+            <b>stock: </b>
+            {product.stock}
+          </p>
+          <p>
+            <b>rarity: </b>
+            {product.rarity}
+          </p>
+          <p>
+            <b>category: </b>
+            {product.category}
+          </p>
+          <form onSubmit={addToCart}  > <button className="cart-btn">add to cart</button> </form> 
+        </div>
+      </div>
     </div>
     : null
   );
