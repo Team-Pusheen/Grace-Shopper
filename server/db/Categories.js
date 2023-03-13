@@ -15,7 +15,21 @@ const createCategory = async({productsId, category}) =>
     return response.rows[0].category;
 }
 
+const updateCategory = async({productsId, category}) =>
+{
+    const SQL =`
+    UPDATE categories
+    SET category = $2
+    WHERE "productsId" = $1
+    RETURNING *
+    ;`
+
+    const {rows} = await client.query((SQL, [productsId, category]));
+    return rows[0].category;
+}
+
 module.exports ={
-createCategory
+createCategory,
+updateCategory
 };
 

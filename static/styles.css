@@ -488,3 +488,26 @@ nav a:hover {
 .footer-card p {
   color: white;
 }
+/* .footer-card {
+  overflow: hidden;
+  background: grey;
+} */
+
+/*---Admin Page---*/
+
+#AdminPage{
+  display: flex;
+  justify-content: space-around;
+}
+
+#productsList{
+  width: calc(100vw/3);
+  height: 600px;
+  overflow-y: scroll;
+}
+
+#userList{
+  width: calc(100vw/3);
+  height: 600px;
+  overflow-y: scroll;
+}
