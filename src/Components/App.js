@@ -20,7 +20,6 @@ const App = ()=> {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
-  const navigate = useNavigate();
 
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
@@ -102,13 +101,9 @@ const App = ()=> {
   };
 
   return (
-<<<<<<< HEAD
-    <div className='wrap'>  
-=======
     <div>
->>>>>>> c56ce748b4d693aa1879e19cf747ca311064ba35
       <nav>
-        <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
+        <Link to='/'><div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div></Link>
         <div className="top-container">
         <div className="logo-div">        
         <NavLink to='/'>Home</NavLink>
@@ -152,6 +147,7 @@ const App = ()=> {
             </>
           )
         }
+        <Route path='/' element= { <Home auth={ auth }/> } />
         <Route path= '/products' element={<Products products={products}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
@@ -160,7 +156,6 @@ const App = ()=> {
       </Routes> 
       </div>
       <Footer />
-
     </div>
   );
 };
