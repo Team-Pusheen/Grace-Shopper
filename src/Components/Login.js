@@ -11,22 +11,24 @@ const Login = ({ login })=> {
     navigate("/products");
   };
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={ _login }>
-        <input
-          placeholder='username'
-          value = { username }
-          onChange = { ev => setUsername(ev.target.value) }
+    <div className='login-container'>
+      <div className='login-card'>
+        <h2>Login</h2>
+        <form onSubmit={ _login }>
+          <input
+            placeholder='username'
+            value = { username }
+            onChange = { ev => setUsername(ev.target.value) }
+            />
+          <input
+            placeholder='password'
+            value={ password }
+            type = "password"
+            onChange = { ev => setPassword(ev.target.value) }
           />
-        <input
-          placeholder='password'
-          value={ password }
-          type = "password"
-          onChange = { ev => setPassword(ev.target.value) }
-        />
-        <button>Login</button>
-      </form>
+          <button className='login-signup-btn'>Login</button>
+        </form>
+      </div>
     </div>
   );
 };

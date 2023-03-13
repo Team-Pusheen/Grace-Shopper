@@ -102,7 +102,11 @@ const App = ()=> {
   };
 
   return (
+<<<<<<< HEAD
+    <div className='wrap'>  
+=======
     <div>
+>>>>>>> c56ce748b4d693aa1879e19cf747ca311064ba35
       <nav>
         <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
         <div className="top-container">

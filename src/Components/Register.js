@@ -21,20 +21,23 @@ const Register =() =>
         setEmail("");
     }
 
-    return <div>
-        <form onSubmit={goRegister}>
-            <label>Name</label>
-            <input placeholder="Name..." onChange={ev => setName(ev.target.value)} value={name}></input>
-            <label>Email</label>
-            <input placeholder="Email" value={email} onChange={ev => setEmail(ev.target.value)}></input>
-            <label>Username</label>
-            <input placeholder="Username" value={username} onChange={ev => setUsername(ev.target.value)}></input>
-            <label>Password</label>
-            <input placeholder="Password" value={password} type="password" onChange={ev => setPassword(ev.target.value)}></input>
-            <button>Submit</button>
-        </form>
-        <div>
-            {result.name == "UserExistsError" || result.name =="Welcome" ? <p>{result.message}</p> :null}
+    return <div className="login-container">
+        <div className="login-card">
+            <h2> Sign Up</h2>
+            <form onSubmit={goRegister}>
+                <label>Name</label>
+                <input placeholder="Name..." onChange={ev => setName(ev.target.value)} value={name}></input>
+                <label>Email</label>
+                <input placeholder="Email" value={email} onChange={ev => setEmail(ev.target.value)}></input>
+                <label>Username</label>
+                <input placeholder="Username" value={username} onChange={ev => setUsername(ev.target.value)}></input>
+                <label>Password</label>
+                <input placeholder="Password" value={password} type="password" onChange={ev => setPassword(ev.target.value)}></input>
+                <button className="login-signup-btn">Submit</button>
+            </form>
+            <div>
+                {result.name == "UserExistsError" || result.name =="Welcome" ? <p>{result.message}</p> :null}
+            </div>
         </div>
     </div>
 }

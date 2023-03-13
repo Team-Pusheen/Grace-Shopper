@@ -1,6 +1,7 @@
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { GiPocketBow } from 'react-icons/gi'
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -19,6 +20,10 @@ const Home = ()=> {
         repeat={Infinity} 
         />
         <p><GiPocketBow /></p>
+      </div>
+      <div className='wares-container'>
+       
+        <NavLink to ='/products'><button className='wares-button'>Browse Our Wares</button></NavLink>
       </div>
     </div>
   );

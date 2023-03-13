@@ -2,16 +2,11 @@ import React from 'react';
 
 const Footer = ()=> {
   return (
-    <div className='ft'>
     <div className='footer-container'>
-        <div className='footer'>
-        </div>
-
-    </div>        
-    <div className="footer-card">
-        <p>footer here</p>
-    </div>
-    </div>
+      <div className="footer-card">
+        <p>Team Pusheen &#169; 2023</p>
+      </div>
+    </div>    
   );
 };
 
