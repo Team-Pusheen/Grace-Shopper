@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {createUser, getUserByUsername, getUserByToken} = require("../db/User");
+const {createUser, getUserByUsername, getAllUsers} = require("../db/User");
 const {getUserCart} = require("../db/Carts");
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -45,6 +45,7 @@ router.get('/:userId/cart', async(req, res, next) =>{
         const auth = req.header('Authorization');
         if(auth)
         {
+            //check if the user matches
             const userCart = await getUserCart({userId:userId});
             res.send(userCart);
         }else{
@@ -63,5 +64,34 @@ router.get('/:userId/cart', async(req, res, next) =>{
 
 })
 
+router.get('/', async(req, res, next) =>
+{
+    try{
+        const prefix = 'Bearer ';
+        const auth = req.header('Authorization');
+        const admin = req.header('Administrator');
+
+        if(auth && admin)
+        {
+            //check logged in user
+            const token = auth.slice(prefix.length);
+            const currentUser = jwt.verify(token, JWT);
+            
+
+            const allUsers = await getAllUsers();
+            res.send(allUsers)
+        }
+        else{
+            res.status(403);
+            next({
+                name:"NotAdminError",
+                message: "The admin is not logged in or user is not a asmin"
+            })
+        }
+    }catch(error)
+    {
+        next(error);
+    }
+})
 
 module.exports = router;

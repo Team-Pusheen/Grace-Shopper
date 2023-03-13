@@ -31,8 +31,7 @@ const Cart =({cart, setCart, id}) =>
     }
 
     const purchase = async() =>
-    {   //need to figure out the issue with getting a null constraint when reducing stock
-        
+    {           
         //alter the stock of the item
         for(let i=0; i< cart.length; i++)
         {

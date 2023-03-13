@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ login })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const navigate = useNavigate();
   const _login = (ev)=> {
     ev.preventDefault();
     login({ username, password });
+    navigate("/products");
   };
   return (
     <div>

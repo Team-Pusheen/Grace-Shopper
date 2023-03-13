@@ -7,6 +7,7 @@ import Cart from './Cart';
 import {getProducts, grabUserCart} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
+import Admin from './Admin';
 import { Link, NavLink, Routes, Route, useNavigate } from 'react-router-dom';
 import { GiSwordman, GiOpenChest, GiLockedChest } from 'react-icons/gi'
 
@@ -17,6 +18,8 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
+
   const navigate = useNavigate();
 
   const attemptLogin = async()=> {
@@ -69,8 +72,10 @@ const App = ()=> {
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
+
     // redirect to login page
    navigate('/login')
+
   }
 
   const login = async({ username, password})=> {
@@ -97,14 +102,14 @@ const App = ()=> {
   };
 
   return (
-    <div>  
+    <div>
       <nav>
         <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
         <div className="top-container">
         <div className="logo-div">        
         <NavLink to='/'>Home</NavLink>
         <NavLink to ='/products'>Products</NavLink>
-        
+        {auth.isAdministrator ? <Link to='/admin'>Admin</Link>: null}
         </div>
       {
           auth.id ? (
@@ -147,6 +152,7 @@ const App = ()=> {
         <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
+      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth}/>}/>:null}
       </Routes> 
       </div>
       <Footer />
