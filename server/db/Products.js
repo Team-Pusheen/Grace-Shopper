@@ -43,7 +43,7 @@ const deleteProduct = async({id}) => {
       RETURNING *
        ;`, [id])
 
-return rows;
+return rows[0];
   } catch (error) {
     console.log(error)
     throw error

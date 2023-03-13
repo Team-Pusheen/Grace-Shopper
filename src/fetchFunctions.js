@@ -1,3 +1,4 @@
+
 export const getProducts = (async() =>{
     
    return fetch('/api/products',{
@@ -168,3 +169,67 @@ export const allUsers= (async(isAdmin) =>
         return result;
     })
 })
+
+
+export const addProductToStock = (async(isAdmin, name, description, price, stock, rarity, imageURL, category) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    return fetch('/api/products/', {
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        },
+        body: JSON.stringify({
+            name: `${name}`,
+            description: `${description}`,
+            price: `${price}`,
+            stock: `${stock}`,
+            rarity: `${rarity}`,
+            imageURL: `${imageURL}`,
+            category: `${category}`
+        })
+    }).then(responce =>responce.json())
+    .then(result =>
+        {
+            return result;
+        })
+})
+
+
+export const removeProduct = async(pId, isAdmin) =>
+{
+    const token = window.localStorage.getItem('token');
+
+    return fetch(`/api/products/${pId}`,{
+        method: "DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Administrator': `${isAdmin}`
+        }
+    }).then(responce => responce.json())
+    .then(result =>{
+        console.log(result);
+        return result;
+    })
+}
+
+//get all the categories
+export const getCategoriesList = async() =>
+{
+    return fetch("/api/categories", {
+        method:"GET",
+    }).then(response => response.json())
+    .then(result =>{
+        console.log(result);
+        return result;
+    })
+}
+
+export const updateProduct = async() =>
+{
+    //return fetch
+}

@@ -4,7 +4,7 @@ import Login from './Login';
 import Products from './Products';
 import Register from './Register';
 import Cart from './Cart';
-import {getProducts, grabUserCart} from "../fetchFunctions"
+import {getProducts, grabUserCart, getCategoriesList} from "../fetchFunctions"
 import SingleView from "./SingleView"
 import Footer from "./Footer"
 import Admin from './Admin';
@@ -18,7 +18,10 @@ const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] =useState([]);
   const [cart, setCart] = useState([]);
+  const [productChange, setProductChange] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
   const navigate = useNavigate();
+
 
   const navigate = useNavigate();
 
@@ -48,11 +51,12 @@ const App = ()=> {
     {
       const allProducts = await getProducts()
       setProducts(allProducts);
+      setProductChange(false);
     }
     grabProducts();
        
 
-  }, []);
+  }, [productChange]);
 
   useEffect(() =>
   {    
@@ -68,6 +72,15 @@ const App = ()=> {
       getCart();
     }
   },[auth])
+
+useEffect(() =>{
+  const grabCategories = async() =>
+  {
+    const cList = await getCategoriesList();
+    setCategoryList(cList);
+  }
+  grabCategories();
+},[])
 
   const logout = ()=> {
     window.localStorage.removeItem('token');
@@ -102,11 +115,9 @@ const App = ()=> {
   };
 
   return (
-<<<<<<< HEAD
+
     <div className='wrap'>  
-=======
     <div>
->>>>>>> c56ce748b4d693aa1879e19cf747ca311064ba35
       <nav>
         <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
         <div className="top-container">
@@ -152,11 +163,12 @@ const App = ()=> {
             </>
           )
         }
-        <Route path= '/products' element={<Products products={products}/> }/>
+
+        <Route path= '/products' element={<Products products={products} categoryList={categoryList}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
       <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
-      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin products={products} adminInfo={auth}/>}/>:null}
+      {auth.isAdministrator ? <Route path ='/admin' element ={<Admin categoryList={categoryList} products={products} adminInfo={auth} setProductChange={setProductChange}/>}/>:null}
       </Routes> 
       </div>
       <Footer />
