@@ -23,8 +23,6 @@ const App = ()=> {
   const navigate = useNavigate();
 
 
-  const navigate = useNavigate();
-
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -173,6 +171,7 @@ useEffect(() =>{
       </div>
       <Footer />
 
+    </div>
     </div>
   );
 };

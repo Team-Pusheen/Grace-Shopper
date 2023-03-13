@@ -1,7 +1,7 @@
 
 const client = require('./client');
 const jwt = require('jsonwebtoken');
-const { createCategory } = require('./Categories');
+const { createCategory, updateCategory } = require('./Categories');
 const { getReviewsByProductId } = require('./Reviews')
 const JWT = process.env.JWT;
 
@@ -141,16 +141,20 @@ const changeStockOfProduct = async ({productsId, stock}) =>
 
 
 //edit entire product
-const editProduct = async ({id ,name, description, rarity, stock, price, imageURL}) =>
+const editProduct = async ({id ,name, description, rarity, stock, price, imageURL, category}) =>
 {
+  console.log(id);
   try {
     const SQL =  `
     UPDATE products
-    SET name=$2, desription=$3, rarity=$4, stock=$5, price=$7, "imageURL"=$8
+    SET name=$2, description=$3, rarity=$4, stock=$5, price=$6, "imageURL"=$7
     WHERE id = $1
+    RETURNING *
     ;`
     const {rows} = await client.query(SQL,[id, name, description, rarity, stock, price, imageURL])
-    return rows
+    const newCategory = await updateCategory({productsId:id, category:category})
+    rows[0].category=newCategory.category
+    return rows[0];
     
   } catch (error) {
     throw error
