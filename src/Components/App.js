@@ -22,7 +22,6 @@ const App = ()=> {
   const [categoryList, setCategoryList] = useState([]);
   const navigate = useNavigate();
 
-
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -83,7 +82,7 @@ useEffect(() =>{
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
-
+    setCart([]);
     // redirect to login page
    navigate('/login')
 
@@ -172,6 +171,7 @@ useEffect(() =>{
       </Routes> 
       </div>
       <Footer />
+    </div>
     </div>
   );
 };
