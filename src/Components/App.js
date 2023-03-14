@@ -22,9 +22,6 @@ const App = ()=> {
   const [categoryList, setCategoryList] = useState([]);
   const navigate = useNavigate();
 
-
- 
-
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -116,10 +113,12 @@ useEffect(() =>{
 
   return (
 
+
     <div className='wrap'>  
+
     <div>
       <nav>
-        <div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div>
+        <Link to='/'><div className="logo-div"><p><GiSwordman className='logo' /> Pusheen Bazaar</p></div></Link>
         <div className="top-container">
         <div className="logo-div">        
         <NavLink to='/'>Home</NavLink>
@@ -163,7 +162,7 @@ useEffect(() =>{
             </>
           )
         }
-
+        <Route path='/' element= { <Home auth={ auth }/> } />
         <Route path= '/products' element={<Products products={products} categoryList={categoryList}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
@@ -172,7 +171,6 @@ useEffect(() =>{
       </Routes> 
       </div>
       <Footer />
-
     </div>
     </div>
   );
