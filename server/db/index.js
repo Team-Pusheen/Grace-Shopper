@@ -7,7 +7,7 @@ const {
   getUserByUsername,
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
-const {createCategory} = require('./Categories')
+const {createCategory, getAllCategories} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
 
@@ -223,6 +223,10 @@ console.log(item3);
 
 console.log("--get product by Id--");
 console.log(await getProductById({id:2}));
+
+console.log("--get all categories--");
+console.log(await getAllCategories());
+
 };
 
 

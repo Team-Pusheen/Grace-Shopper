@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const UpdateForm =({productInfo, setEditProduct}) =>
+const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProductChange}) =>
 { 
     const [name, setName] = useState(productInfo.name); 
     const [desc, setDesc] = useState(productInfo.description);
@@ -9,11 +9,25 @@ const UpdateForm =({productInfo, setEditProduct}) =>
     const [Rarity, setRarity] = useState(productInfo.rarity);
     const [category, setCategory] = useState(productInfo.category);
     const [image, setImage] = useState(productInfo.imageURL);
+    const [newCategory, setNewCategory] = useState("");
 
     const goUpdate = async(ev) =>
     {
         ev.preventDefault();
+        if(newCategory)
+        {
+
+        }
+        else{
+
+        }
+        setProductChange(true);
         
+    }
+    
+    if(!categoryList.includes("Other"))
+    {
+        categoryList.push("Other");
     }
 
     if(!productInfo.id)
@@ -30,23 +44,31 @@ const UpdateForm =({productInfo, setEditProduct}) =>
             </>
             <>
             <label>Description:</label>
-            <input placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></input>
+            <textarea placeholder="description" value={desc} onChange={ev =>{setDesc(ev.target.value)}}></textarea>
             </>
             <>
             <label>Price:</label>
-            <input placeholder="price in copper coins" value={price} onChange={ev =>{setPrice(ev.target.value)}}></input>
+            <input placeholder="price in copper coins" type="number" value={price} onChange={ev =>{setPrice(ev.target.value)}}></input>
             </>
             <>
             <label>Stock:</label>
-            <input placeholder="stock count" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
+            <input placeholder="stock count" type="number" value={stock} onChange={ev =>{setStock(ev.target.value)}}></input>
             </>
             <>
             <label>Rarity:</label>
-            <input placeholder="rarity" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
+            <input placeholder="rarity" type="number" value={Rarity} onChange={ev =>{setRarity(ev.target.value)}}></input>
             </>
             <>
-            <label>Category:</label>
-            <input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>
+            <label htmlFor="category-names">Category:</label>
+            <select value={category} onChange={ev =>{setCategory(ev.target.value)}} name="category-names">
+                {
+                    categoryList.map((category, idx) =>{
+                        return <option key={idx} value={category}>{category}</option>
+                    })
+                }
+            </select>
+            {category === "Other" ? <input placeholder="new Category" value={newCategory} onChange={ev =>{setNewCategory(ev.target.value)}}></input>:null}
+            {/*<input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>*/}
             </>
             <>
             <label>Image Link:</label>
