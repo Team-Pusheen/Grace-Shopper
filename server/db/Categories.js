@@ -24,12 +24,30 @@ const updateCategory = async({productsId, category}) =>
     RETURNING *
     ;`
 
-    const {rows} = await client.query((SQL, [productsId, category]));
+    const {rows} = await client.query(SQL, [productsId, category]);
     return rows[0].category;
+}
+
+const getAllCategories = async() =>
+{
+    const SQL =`
+        SELECT DISTINCT category
+        FROM categories
+    ;`
+
+    const {rows} = await client.query(SQL);
+
+    const categoryArray = rows.map((category) =>
+    {
+        return category.category;
+    })
+
+    return categoryArray;
 }
 
 module.exports ={
 createCategory,
-updateCategory
+updateCategory,
+getAllCategories
 };
 

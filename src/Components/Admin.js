@@ -1,21 +1,41 @@
 import React, {useState} from "react";
 import { GiQuill } from "react-icons/gi";
-import { allUsers } from "../fetchFunctions";
+import { allUsers, removeProduct} from "../fetchFunctions";
 import UpdateForm from "./UpdateForm";
+import AddProduct from "./AddProduct";
 
-const Admin = ({products, adminInfo})=>
+const Admin = ({categoryList, products, adminInfo, setProductChange})=>
 {
     const [userList, setUserList] = useState([]);
     const [editProduct, setEditProduct] =useState({});
+    const [canAdd, setCanAdd] = useState(false);
     
     const canEdit = (product) =>
     {
-        setEditProduct(product);
+        if(!canAdd)
+        {
+            setEditProduct(product);
+        }
+    }
+
+    const add = () =>
+    {
+        if(!editProduct.id)
+        {
+            setCanAdd(true);
+        }
+        
     }
 
     const getAllUsers = async() =>
     {
         setUserList( await allUsers(adminInfo.isAdministrator));
+    }
+
+    const remove = async(pId) =>
+    {   
+        const removedProduct = await removeProduct(pId, adminInfo.isAdministrator);
+        setProductChange(true);
     }
 
     if(!userList.length >0)
@@ -28,7 +48,7 @@ const Admin = ({products, adminInfo})=>
     {
        products ? <div>
                 <h2>Products</h2>
-                
+                <button onClick={add}>Add Product</button>
                 {
                    <div id="productsList">
                     {
@@ -38,13 +58,14 @@ const Admin = ({products, adminInfo})=>
                                 <ul>
                                     <h3>{product.name}</h3>
                                     <button onClick={() =>{canEdit(product)}}><GiQuill /></button>
+                                    <button onClick={() =>{remove(product.id)}}>X</button>
                                     <ul>
                                         <li>Description: {product.description}</li>
                                         <li>Price: {product.price} copper coins</li>
                                         <li>Stock: {product.stock}</li>
                                         <li>Rarity: {product.rarity}</li>
                                         <li>Category: {product.category}</li>
-                                        <li>image UR: {product.imageURL}</li>
+                                        <li>image URL: {product.imageURL}</li>
                                     </ul>
                                 </ul>
                             </div>
@@ -54,7 +75,9 @@ const Admin = ({products, adminInfo})=>
             
          </div>: null
         }
-        <div id="updateForms">{editProduct.id ? <UpdateForm productInfo={editProduct} setEditProduct={setEditProduct}/>:null}</div>
+        <div id="updateForms">{editProduct.id && canAdd===false ? <UpdateForm categoryList={categoryList} productInfo={editProduct} isAdmin={adminInfo.isAdministrator} setEditProduct={setEditProduct} setProductChange={setProductChange}/>:null}
+        {canAdd ? <AddProduct categoryList={categoryList} isAdmin={adminInfo.isAdministrator} setCanAdd={setCanAdd} canAdd={canAdd} setProductChange={setProductChange}/>:null}
+        </div>
         {
             userList ? 
             <div>
