@@ -83,7 +83,7 @@ useEffect(() =>{
     window.localStorage.removeItem('token');
     setAuth({});
     setCart([]);
-    // redirect to login page
+    
    navigate('/login')
 
   }
@@ -165,7 +165,7 @@ useEffect(() =>{
         <Route path= '/products' element={<Products products={products} categoryList={categoryList}/> }/>
         <Route path= '/products/:productsId' element={<SingleView products={products} cartId={auth.cartId} setCart={setCart} cart={cart} userId={auth.id} />}/>
 
-      <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id}/>} />
+      <Route path = '/cart' element={<Cart cart={cart} setCart={setCart} id={auth.id} setProductChange={setProductChange}/>} />
       {auth.isAdministrator ? <Route path ='/admin' element ={<Admin categoryList={categoryList} products={products} adminInfo={auth} setProductChange={setProductChange}/>}/>:null}
       </Routes> 
       </div>
