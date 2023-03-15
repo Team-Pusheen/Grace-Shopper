@@ -22,6 +22,7 @@ const App = ()=> {
   const [categoryList, setCategoryList] = useState([]);
   const navigate = useNavigate();
 
+
   const attemptLogin = async()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -171,6 +172,7 @@ useEffect(() =>{
       </Routes> 
       </div>
       <Footer />
+    </div>
     </div>
     </div>
   );

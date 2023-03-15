@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {updateProduct} from "../fetchFunctions"
 
 const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProductChange}) =>
 { 
@@ -13,14 +14,17 @@ const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProdu
 
     const goUpdate = async(ev) =>
     {
+        console.log(category);
         ev.preventDefault();
         if(newCategory)
         {
+            await updateProduct(isAdmin, productInfo.id, name, desc, price, stock, Rarity, image, newCategory);
 
         }
         else{
-
+            await updateProduct(isAdmin, productInfo.id, name, desc, price, stock, Rarity, image, category);
         }
+        setEditProduct({});
         setProductChange(true);
         
     }
@@ -68,7 +72,6 @@ const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProdu
                 }
             </select>
             {category === "Other" ? <input placeholder="new Category" value={newCategory} onChange={ev =>{setNewCategory(ev.target.value)}}></input>:null}
-            {/*<input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>*/}
             </>
             <>
             <label>Image Link:</label>

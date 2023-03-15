@@ -10,13 +10,20 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
     const [Rarity, setRarity] = useState("");
     const [category, setCategory] = useState("");
     const [image, setImage] = useState("");
+    const [newCategory, setNewCategory] = useState("");
 
     const goAdd = async(ev) =>
     {
         ev.preventDefault();
-        if(name && desc && price && stock && Rarity && category)
+        if(name && desc && price && stock && Rarity && category && category !== "----")
         {
-            const newProduct = await addProductToStock(isAdmin, name, desc, price, stock, Rarity, image, category);
+            await addProductToStock(isAdmin, name, desc, price, stock, Rarity, image, category);
+            setCanAdd(false);
+            setProductChange(true);
+        }
+        else if(name && desc && price && stock && Rarity && newCategory)
+        {
+            await addProductToStock(isAdmin, name, desc, price, stock, Rarity, image, newCategory);
             setCanAdd(false);
             setProductChange(true);
         }
@@ -59,7 +66,14 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
         </>
         <>
         <label>Category:</label>
-        <input placeholder="category" value={category} onChange={ev =>{setCategory(ev.target.value)}}></input>
+        <select value={category} onChange={ev =>{setCategory(ev.target.value)}} name="category-names">
+                {
+                    categoryList.map((category, idx) =>{
+                        return <option key={idx} value={category}>{category}</option>
+                    })
+                }
+            </select>
+            {category === "Other" ? <input placeholder="new Category" value={newCategory} onChange={ev =>{setNewCategory(ev.target.value)}}></input>:null}
         </>
         <>
         <label>Image Link:</label>
