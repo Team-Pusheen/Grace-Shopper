@@ -5,7 +5,6 @@ import {toCart, grabUserCart, cartAmountUpdate } from "../fetchFunctions";
 
 const SingleView = ({ products, cartId, setCart, cart, userId }) => { 
   const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
   const { productsId } = useParams();
   const id = productsId.slice(1);
   const product = products.find((product) => product.id == id * 1);
