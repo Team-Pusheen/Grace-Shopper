@@ -4,6 +4,7 @@ const {
   getUserByToken,
   createUser,
   authenticate,
+  getUserByEmail
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory, getAllCategories} = require('./Categories')
@@ -225,6 +226,9 @@ console.log(await getProductById({id:2}));
 
 console.log("--get all categories--");
 console.log(await getAllCategories());
+
+console.log("--Get user by email--");
+console.log(await getUserByEmail({email:"moe.pro@email.com"}))
 
 };
 
