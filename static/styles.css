@@ -353,7 +353,6 @@ nav a:hover {
 .full-cart-container {  
   display: flex;
   margin: 60px;
-  height: 76vh;
   flex-direction: column;
   background-color: white;
   align-items: center;
@@ -364,7 +363,7 @@ nav a:hover {
 .cart-container {
   display: flex;
   font-size: 20px;
-  width: 100%;
+  width: 97%;
 
 }
 
@@ -453,6 +452,7 @@ nav a:hover {
   background-color:  #609966;
   border: solid 2px  #609966;
   font-size: 25px;
+  margin-bottom: 50px;
 }
 
 .purchase-btn:hover {
