@@ -4,15 +4,14 @@ const {
   getUserByToken,
   createUser,
   authenticate,
-  getUserByUsername,
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory, getAllCategories} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
 
-const {attachReviews, getAllProducts, getProductsByCategory, getProductById} = require('./Products')
-const {getUserCart} = require("./Carts")
+const { getAllProducts, getProductsByCategory, getProductById} = require('./Products')
+
 
 
 

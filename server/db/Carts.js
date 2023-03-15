@@ -20,7 +20,7 @@ async function getUserCart ({userId}) {
     
     const cartId = id.id;
         
-    const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = $1;`,[id.id]);
+    const {rows} = await client.query(`SELECT * FROM cart_products WHERE "cartId" = $1;`,[cartId]);
     
     const cart = rows.map(async(cartItem) =>
     {

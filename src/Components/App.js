@@ -38,7 +38,6 @@ const App = ()=> {
       .then( response => response.json())
       .then( user => {
         setAuth(user)
-        console.log(user);
       });
     }
   };
@@ -107,7 +106,6 @@ useEffect(() =>{
         attemptLogin();
       }
       else {
-        console.log(data);
       }
     });
   };

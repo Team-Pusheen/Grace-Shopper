@@ -92,7 +92,6 @@ async function getUserById({userId}) {
   `,[userId] );
   
   const cart = await getUserCart({userId});
-  console.log(cart);
   rows[0].cart = cart;
   delete rows[0].password;
   return rows[0];
