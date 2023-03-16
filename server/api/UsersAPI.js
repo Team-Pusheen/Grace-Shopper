@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {createUser, getUserByUsername, getAllUsers} = require("../db/User");
+const {createUser, getUserByUsername, getAllUsers, getUserByEmail} = require("../db/User");
 const {getUserCart} = require("../db/Carts");
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -15,12 +15,25 @@ router.post('/register', async(req, res, next) =>
 
         if(!userExists)
         {
-            const newUser = await createUser({username:username, password:password,name:name, email:email, isAdministrator:isAdministrator});
-            res.send({
-                name: 'Welcome',
-                message: `Welcome ${username}, to the Pusheen Baazar!`,
-                user:newUser
-            });
+            const userEmailUsed = await getUserByEmail({email});
+
+            if(!userEmailUsed)
+            {
+                const newUser = await createUser({username:username, password:password,name:name, email:email, isAdministrator:isAdministrator});
+                res.send({
+                    name: 'Welcome',
+                    message: `Welcome ${username}, to the Pusheen Baazar!`,
+                    user:newUser
+                });
+            }
+            else{
+                next({
+                    name:"EmailUsedAlready",
+                    message:`The email ${email} is already in use.`
+                })
+            }
+
+            
         }
         else{
             next({

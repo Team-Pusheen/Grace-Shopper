@@ -4,15 +4,15 @@ const {
   getUserByToken,
   createUser,
   authenticate,
-  getUserByUsername,
+  getUserByEmail
 } = require('./User');
 const {createProduct, deleteProduct} = require('./Products')
 const {createCategory, getAllCategories} = require('./Categories')
 const {addProduct, emptyCart, removeItem, changeQuantity} = require ('./CartProducts')
 const {createReview, getReviewsByProductId, getReviewsByUserId} = require('./Reviews');
 
-const {attachReviews, getAllProducts, getProductsByCategory, getProductById} = require('./Products')
-const {getUserCart} = require("./Carts")
+const { getAllProducts, getProductsByCategory, getProductById} = require('./Products')
+
 
 
 
@@ -97,6 +97,20 @@ const syncAndSeed = async () => {
       name: "Tyler",
       email:"tyler.admin@pusheen.com",
       isAdministrator: true,
+    }),
+    createUser({
+      username: "SamIAm",
+      password: "SamHeIsNot",
+      name:"Sam",
+      email:"samiam@email.com",
+      isAdministrator:false,
+    }),
+    createUser({
+      username: "JennyQuick",
+      password: "123abc",
+      name: "Jenny",
+      email: "jenny.jenny@emai.com",
+      isAdministrator: false,
     })
   ]);
   console.log("--- seeded users ---");
@@ -110,7 +124,7 @@ const syncAndSeed = async () => {
       price: 15,
       stock: 200,
       rarity: 1,
-      category: "weapon"
+      category: "Weapon"
     }),
     createProduct({
       name: "Staff",
@@ -120,7 +134,7 @@ const syncAndSeed = async () => {
       stock: 200,
       rarity: 1,
       imageURL: "https://oldschool.runescape.wiki/images/thumb/Bryophyta%27s_staff_%28uncharged%29_detail.png/1200px-Bryophyta%27s_staff_%28uncharged%29_detail.png?7ef7e",
-      category: "weapon"
+      category: "Weapon"
     }),
     createProduct({
       name: "Bag of Holding",
@@ -129,7 +143,7 @@ const syncAndSeed = async () => {
       stock: 150,
       rarity: 3,
       imageURL: "https://www.dndbeyond.com/avatars/thumbnails/7/120/1000/1000/636284708068284913.jpeg",
-      category: "tool"
+      category: "Tool"
     }),
     createProduct({
       name:"Immovable Rod",
@@ -138,7 +152,7 @@ const syncAndSeed = async () => {
       stock:230,
       rarity:3,
       imageURL:"https://www.dndbeyond.com/avatars/thumbnails/7/261/1000/1000/636284741670235041.jpeg",
-      category:"tool"
+      category:"Tool"
     }),
     createProduct({
       name:"Vorpal Sword",
@@ -147,16 +161,61 @@ const syncAndSeed = async () => {
       stock:2,
       rarity:5,
       imageURL: "https://www.dndbeyond.com/avatars/thumbnails/7/462/1000/1000/636284780691337497.jpeg",
-      category: "weapon"
+      category: "Weapon"
     }),
     createProduct({
       name:"Rebellion Replica",
       description: "A replica of a sword weilded by a demon hunter. While not as powerful as the origional it still packs a punch.",
       price:560,
       stock:602,
-      rarity:2,
+      rarity:3,
       imageURL: "https://i.pinimg.com/originals/fe/97/90/fe9790423a874695d4773aec40289bf5.jpg",
-      category: "weapon"
+      category: "Weapon"
+    }),
+    createProduct({
+      name:"Master Sword Replica",
+      description:"A replica of the blade of evil's bane. While it don't have it's evil stopping properties it works very well as an enchanted sword.",
+      price:600,
+      stock:520,
+      rarity:3,
+      imageURL:"https://upload.wikimedia.org/wikipedia/en/f/f9/Master_Sword_Lead.png",
+      category: "Weapon"
+    }),
+    createProduct({
+      name:"Cloak of the Manta Ray",
+      description: "A cloak in the likness of a manta ray. When the hood is pulled up it will let you swim faster and breath underwater. A must for underwater adventuring.",
+      price: 450,
+      stock: 352,
+      rarity:2,
+      imageURL:"https://www.dndbeyond.com/avatars/thumbnails/7/170/1000/1000/636284723816150463.jpeg",
+      category: "Clothing"
+    }),
+    createProduct({
+      name:"Armor of Invulnerability",
+      description:"A armor that makes you invulnerable to mundate attacks for a short time.",
+      price: 6965000,
+      stock: 2,
+      rarity:5,
+      imageURL:"https://www.dndbeyond.com/avatars/thumbnails/7/110/1000/1000/636284703543037516.jpeg",
+      category: "Armor"
+    }),
+    createProduct({
+      name: "Enchanted Armor",
+      description: "Armor that has been enchanted to make it more durable and more protective",
+      price: 1950,
+      stock: 653,
+      rarity:3,
+      imageURL:"https://www.aidedd.org/dnd/images-om/plate-armor-of-resistance.jpg",
+      category: "Armor"
+    }),
+    createProduct({
+      name: "Cloak of Billowing",
+      description:"A cloak that will billow dramatically behind you on your comand.",
+      price: 70,
+      stock: 300,
+      rarity:1,
+      imageURL: "https://www.gmbinder.com/images/OGl31Kh.jpg",
+      category: "Clothing"
     })
   ])
 
@@ -226,6 +285,9 @@ console.log(await getProductById({id:2}));
 
 console.log("--get all categories--");
 console.log(await getAllCategories());
+
+console.log("--Get user by email--");
+console.log(await getUserByEmail({email:"moe.pro@email.com"}))
 
 };
 

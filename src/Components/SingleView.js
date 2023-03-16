@@ -5,7 +5,6 @@ import {toCart, grabUserCart, cartAmountUpdate } from "../fetchFunctions";
 
 const SingleView = ({ products, cartId, setCart, cart, userId }) => { 
   const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
   const { productsId } = useParams();
   const id = productsId.slice(1);
   const product = products.find((product) => product.id == id * 1);
@@ -21,8 +20,11 @@ const SingleView = ({ products, cartId, setCart, cart, userId }) => {
 
   const addToCart = async (e) => {
     e.preventDefault();
+    if (!userId) {
+      alert("You need to log in to add items to the cart.");
+      return;
+    }
     const itemExists = cart.find((item) => item.product.id === product.id);
-    console.log(itemExists);
     if (itemExists) {
       const updateItem = await cartAmountUpdate(cartId, id, itemExists.quantity + 1)
       setCartItems(updateItem)
@@ -41,23 +43,23 @@ const SingleView = ({ products, cartId, setCart, cart, userId }) => {
             <img src={product.imageURL} />
           </div>
           <p>
-            <b>description: </b>
+            <b>Description: </b>
             {product.description}
           </p>
           <p>
-            <b>price: </b>
+            <b>Price: </b>
             {product.price}
           </p>
           <p>
-            <b>stock: </b>
+            <b>Stock: </b>
             {product.stock}
           </p>
           <p>
-            <b>rarity: </b>
+            <b>Rarity: </b>
             {product.rarity}
           </p>
           <p>
-            <b>category: </b>
+            <b>Category: </b>
             {product.category}
           </p>
           <form onSubmit={addToCart}  > <button className="cart-btn">add to cart</button> </form> 
