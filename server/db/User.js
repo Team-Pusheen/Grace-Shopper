@@ -92,7 +92,6 @@ async function getUserById({userId}) {
   `,[userId] );
   
   const cart = await getUserCart({userId});
-  console.log(cart);
   rows[0].cart = cart;
   delete rows[0].password;
   return rows[0];
@@ -142,6 +141,17 @@ const getAllUsers = async() =>
   }
 }
 
+const getUserByEmail = async({email}) =>{
+  const SQL = `
+  SELECT *
+  FROM users
+  WHERE email =$1
+  ;`
+
+  const {rows} = await client.query(SQL, [email]);
+  delete rows[0].password;
+  return rows[0];
+}
 
 module.exports = {
   createUser,
@@ -150,5 +160,6 @@ module.exports = {
   getUser,
   getUserById,
   getUserByUsername,
-  getAllUsers
+  getAllUsers,
+  getUserByEmail
 };

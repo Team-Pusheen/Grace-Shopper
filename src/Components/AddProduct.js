@@ -35,7 +35,7 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
         return null;
     }
 
-    if(!categoryList.includes("----") && !categoryList.includes("other"))
+    if(!categoryList.includes("----") && !categoryList.includes("Other"))
     {
         categoryList.unshift("----");
         categoryList.push("Other");

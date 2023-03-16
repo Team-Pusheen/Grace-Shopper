@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {deleteFromCart, dumpCart, reduceStock, cartAmountUpdate, grabUserCart} from "../fetchFunctions";
 
 
-const Cart =({cart, setCart, id}) =>
+const Cart =({cart, setCart, id, setProductChange}) =>
 {   
     const [totalPrice, setTotalPrice] = useState("");
     const [purchaseMade, setPurchaseMade] = useState(false);
@@ -36,13 +36,14 @@ const Cart =({cart, setCart, id}) =>
         for(let i=0; i< cart.length; i++)
         {
             const newStock = cart[i].product.stock - cart[i].quantity;
-            const reducedProduct = await reduceStock(cart[i].product.id, newStock);
+            await reduceStock(cart[i].product.id, newStock);
         }
          
         //empty the cart
         const id =cart[0].cartId;
         await dumpCart(id);
         setCart([]);
+        setProductChange(true);
         setPurchaseMade(true);
     }
 

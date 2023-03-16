@@ -38,7 +38,6 @@ const removeItem = async({cartId, productsId}) =>{
     ;`
     try{
         const {rows} = await client.query(SQL, [cartId, productsId]);
-        console.log(productsId);
         return rows;
     }catch(error)
     {

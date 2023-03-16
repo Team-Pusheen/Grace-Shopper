@@ -25,7 +25,6 @@ export const register = (async(username, password, name, email) =>
         })
     }).then(response => response.json())
     .then(result => {
-        console.log(result);
         return result;
     })
 })
@@ -212,7 +211,7 @@ export const removeProduct = async(pId, isAdmin) =>
         }
     }).then(responce => responce.json())
     .then(result =>{
-        console.log(result);
+        
         return result;
     })
 }
@@ -224,7 +223,6 @@ export const getCategoriesList = async() =>
         method:"GET",
     }).then(response => response.json())
     .then(result =>{
-        console.log(result);
         return result;
     })
 }
@@ -251,7 +249,6 @@ export const updateProduct = async(isAdmin, id, name, desc, price, stock, rarity
         })
     }).then(responce => responce.json())
     .then(result => {
-        console.log(result);
         return result;
     })
 }

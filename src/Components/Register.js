@@ -36,7 +36,7 @@ const Register =() =>
                 <button className="login-signup-btn">Submit</button>
             </form>
             <div>
-                {result.name == "UserExistsError" || result.name =="Welcome" ? <p>{result.message}</p> :null}
+                {result.name === "UserExistsError" || result.name ==="Welcome" || result.name ==="EmailUsedAlready"? <p>{result.message}</p> :null}
             </div>
         </div>
     </div>
