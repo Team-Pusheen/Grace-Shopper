@@ -48,17 +48,19 @@ const Admin = ({categoryList, products, adminInfo, setProductChange})=>
     {
        products ? <div>
                 <h2>Products</h2>
-                <button onClick={add}>Add Product</button>
+                <button className="add-btn" onClick={add}>Add Product</button>
                 {
                    <div id="productsList">
                     {
                     products.map((product) =>
                     {
-                        return <div key={product.id} cla="productInfo">
+                        return <div key={product.id} className="productInfo">
                                 <ul>
                                     <h3>{product.name}</h3>
-                                    <button onClick={() =>{canEdit(product)}}><GiQuill /></button>
-                                    <button onClick={() =>{remove(product.id)}}>X</button>
+                                    <div id="product-btn-div">
+                                        <button className="product-btn" id="pen-btn" onClick={() =>{canEdit(product)}}><GiQuill /></button>
+                                        <button className="product-btn" id="x-btn" onClick={() =>{remove(product.id)}}>X</button>
+                                    </div>
                                     <ul>
                                         <li>Description: {product.description}</li>
                                         <li>Price: {product.price} copper coins</li>
@@ -80,7 +82,7 @@ const Admin = ({categoryList, products, adminInfo, setProductChange})=>
         </div>
         {
             userList ? 
-            <div>
+            <div className="users-div">
                 <h2>Users</h2>
                 <div id="userList">
                     {

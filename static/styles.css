@@ -4,6 +4,7 @@ body {
   font-family: 'VT323', monospace;
   background-color: #e7e7db;
   margin: 0;
+  overflow: overlay;
   height: 10%;
 }
 
@@ -496,16 +497,160 @@ nav a:hover {
 #AdminPage{
   display: flex;
   justify-content: space-around;
+  margin-bottom: 39px;
+}
+
+.add-btn {
+  cursor: pointer;
+  background-color: #609966;
+  color: white;
+  padding: 10px 25px 10px 25px;
+  border: solid 2px #609966;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family: 'VT323', monospace;
+}
+
+.add-btn:hover {
+  color:  #609966;
+  background-color: white;
+  border: solid 2px #609966;
 }
 
 #productsList{
-  width: calc(100vw/3);
+  width: calc(100vw/2);
   height: 600px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AD8E70;
+  border-radius: 20px;
+
 }
 
 #userList{
   width: calc(100vw/3);
   height: 600px;
   overflow-y: scroll;
+}
+
+.productinfo { 
+  width: 100%;
+}
+
+#product-btn-div {
+  display: flex;
+  margin-bottom: 5px;
+
+  justify-content: flex-end;
+}
+
+.product-btn{
+  background-color: #00bfb6;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 30px;
+  border-style: none;
+}
+
+.product-btn:hover {
+  color: #00bfb6;
+  background-color: white;
+}
+
+.product-btn svg {
+  height: 15px;
+  width: 15px; 
+
+}
+/* #pen-btn {
+    margin-top: 12px;
+} */
+
+#x-btn {
+  height: 35px;
+  width: 35px;
+  background-color: #c14040;
+}
+
+#x-btn:hover {
+  background-color: white;
+  color: #c14040;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+#form-container input {
+  border-style: none;
+  border-radius: 15px;
+  padding: 8px;
+}
+
+#form-container textarea {
+  border-style: none;
+  border-radius: 15px;
+  padding: 8px;
+}
+
+#form-container select {
+  border-style: none;
+  border-radius: 15px;
+  padding: 8px;
+}
+
+
+
+#save-btn {
+  cursor: pointer;
+  background-color: #609966;
+  color: white;
+  padding: 5px 15px 5px 15px;
+  border: solid 2px #609966;
+  border-radius: 20px;
+  font-family: 'VT323', monospace;
+}
+
+#save-btn:hover {
+  color:  #609966;
+  background-color: white;
+  border: solid 2px #609966;
+}
+
+#cancel-btn {
+  cursor: pointer;
+  width: 177px;
+  background-color: #DC0000;
+  color: white;
+  padding: 5px 15px 5px 15px;
+  border: solid 2px #DC0000;
+  border-radius: 20px;
+  font-family: 'VT323', monospace;
+}
+
+#cancel-btn:hover {
+  color:  #DC0000;
+  background-color: white;
+  border: solid 2px  #DC0000;
+}
+
+.users-div {
+  margin-right: -263px;
 }
