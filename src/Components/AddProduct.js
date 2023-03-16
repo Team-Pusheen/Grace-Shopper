@@ -41,7 +41,7 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
         categoryList.push("Other");
     }
 
-    return<div>
+    return<div id="form-container">
     <h2>Create New Product</h2>
     <form onSubmit={goAdd}>
         <>
@@ -79,9 +79,9 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
         <label>Image Link:</label>
         <input placeholder="image link" value={image} onChange={ev =>{setImage(ev.target.value)}}></input>
         </>
-        <button>Save</button>
+        <button id="save-btn">Save</button>
     </form>
-    <button onClick={ev =>setCanAdd(false)}>Cancel</button>
+    <button id="cancel-btn" onClick={ev =>setCanAdd(false)}>Cancel</button>
 </div>
 
 
