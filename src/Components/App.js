@@ -104,10 +104,10 @@ useEffect(() =>{
       if(data.token){
         window.localStorage.setItem('token', data.token);
         attemptLogin();
-        
+        return true;
       }
       else {
-       
+       return false;
       }
     });
   };

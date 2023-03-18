@@ -11,7 +11,11 @@ const Login = ({ login })=> {
     if(username && password)
     {
       const nowIn = await login({ username, password });
-      navigate("/products");
+      if(nowIn)
+      {
+        navigate("/products");
+      }
+      
     }
         
   };
