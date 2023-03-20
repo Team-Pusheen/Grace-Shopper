@@ -89,7 +89,7 @@ useEffect(() =>{
   }
 
   const login = async({ username, password})=> {
-    fetch(
+   fetch(
       '/api/auth/',
       {
         method: 'POST',
@@ -104,8 +104,10 @@ useEffect(() =>{
       if(data.token){
         window.localStorage.setItem('token', data.token);
         attemptLogin();
+        return true;
       }
       else {
+       return false;
       }
     });
   };

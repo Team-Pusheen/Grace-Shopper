@@ -12,8 +12,8 @@ router.post('/:cartId/:productsId', async(req, res, next) =>
 
         if(auth)
         {
-            const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            //const token = auth.slice(prefix.length);
+            //const user = jwt.verify(token, JWT);
 
             const {cartId, productsId} = req.params;
             const {quantity} = req.body;
@@ -42,8 +42,8 @@ router.patch('/:cartId/:productsId', async(req, res, next) =>{
 
         if(auth)
         {
-            const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            //const token = auth.slice(prefix.length);
+            //const user = jwt.verify(token, JWT);
 
             const {cartId, productsId} = req.params;
             const {quantity} = req.body;
@@ -71,8 +71,8 @@ router.delete('/:cartId/:productId', async (req, res, next) =>{
 
         if(auth)
         {
-            const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            //const token = auth.slice(prefix.length);
+            //const user = jwt.verify(token, JWT);
 
             const {cartId, productId} = req.params;
             const deletedItem = await removeItem({cartId:cartId, productsId:productId});
@@ -98,8 +98,8 @@ router.delete('/:cartId', async(req, res, next) =>{
     try{
         if(auth)
         {
-            const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            //const token = auth.slice(prefix.length);
+            //const user = jwt.verify(token, JWT);
 
             const {cartId} = req.params;
             const nowEmpty = await emptyCart({cartId:cartId});

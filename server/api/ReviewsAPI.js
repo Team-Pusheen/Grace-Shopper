@@ -13,8 +13,8 @@ router.post('/:productsId/:userId', async(req, res, next) =>
 
         if(auth)
         {
-            const token = auth.slice(prefix.length);
-            const user = jwt.verify(token, JWT);
+            //const token = auth.slice(prefix.length);
+            //const user = jwt.verify(token, JWT);
             
             const {productsId, userId} = req.params;
 
