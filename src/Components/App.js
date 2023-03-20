@@ -89,7 +89,7 @@ useEffect(() =>{
   }
 
   const login = async({ username, password})=> {
-   fetch(
+   return fetch(
       '/api/auth/',
       {
         method: 'POST',
