@@ -5,10 +5,19 @@ const Login = ({ login })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const _login = (ev)=> {
+  const _login = async (ev)=> {
     ev.preventDefault();
-    login({ username, password });
-    navigate("/products");
+
+    if(username && password)
+    {
+      const nowIn = await login({ username, password });
+      if(nowIn)
+      {
+        navigate("/products");
+      }
+      
+    }
+        
   };
   return (
     <div className='login-container'>

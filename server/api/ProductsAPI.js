@@ -51,7 +51,7 @@ router.post('/', async(req,res,next) =>
 
         if(auth && admin)
         {
-            const token = auth.slice(prefix.length);
+            //const token = auth.slice(prefix.length);
             
 
             const {name, description, price, stock, rarity, imageURL, category} = req.body
@@ -79,7 +79,7 @@ router.patch('/:productsId', async(req, res, next) =>{
         const admin = req.header('Administrator');        
         if(auth && admin)
         {
-            const token = auth.slice(prefix.length);
+            //const token = auth.slice(prefix.length);
             
                 const {productsId} = req.params;
                 const {name, description, price, stock, rarity, imageURL, category} = req.body
