@@ -41,7 +41,7 @@ const AddProduct =({categoryList, isAdmin, setCanAdd, canAdd, setProductChange})
         categoryList.push("Other");
     }
 
-    return<div id="form-container">
+    return<div className="form-container">
     <h2>Create New Product</h2>
     <form onSubmit={goAdd}>
         <>

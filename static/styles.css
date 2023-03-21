@@ -261,6 +261,12 @@ nav a:hover {
   align-items: center;
 }
 
+.products-container select {
+  border-style: none;
+  border-radius: 15px;
+  padding: 8px;
+}
+
 
 .cardContainer {  
   flex: 50%;
@@ -590,7 +596,7 @@ nav a:hover {
   color: #c14040;
 }
 
-#form-container {
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -598,19 +604,19 @@ nav a:hover {
   margin-bottom: 5px;
 }
 
-#form-container input {
+.form-container input {
   border-style: none;
   border-radius: 15px;
   padding: 8px;
 }
 
-#form-container textarea {
+.form-container textarea {
   border-style: none;
   border-radius: 15px;
   padding: 8px;
 }
 
-#form-container select {
+.form-container select {
   border-style: none;
   border-radius: 15px;
   padding: 8px;
