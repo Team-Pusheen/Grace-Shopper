@@ -39,7 +39,7 @@ const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProdu
         return null;
     }
 
-    return <div>
+    return <div className="form-container">
         <h2>Update Item</h2>
         <form onSubmit={goUpdate}>
             <>
@@ -77,9 +77,9 @@ const UpdateForm =({categoryList, productInfo, setEditProduct, isAdmin, setProdu
             <label>Image Link:</label>
             <input placeholder="image link" value={image} onChange={ev =>{setImage(ev.target.value)}}></input>
             </>
-            <button>Save</button>
+            <button id="save-btn">Save</button>
         </form>
-        <button onClick={ev =>setEditProduct({})}>Cancel</button>
+        <button id="cancel-btn" onClick={ev =>setEditProduct({})}>Cancel</button>
     </div>
 }
 
