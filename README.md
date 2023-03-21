@@ -32,7 +32,7 @@ Getting Started
 - npm run start:dev
 
 Usage:
-This site is ment as a demonstration of our skills creating and designing an online store.
+This site is meant as a demonstration of our skills creating and designing an online store.
 ![image](https://user-images.githubusercontent.com/113739521/225653184-2df4ba76-9943-410e-8237-df6f5d6a307e.png)
 ![image](https://user-images.githubusercontent.com/113739521/225653259-268dad9c-4bf5-4941-b2ac-8847dc692483.png)
 ![image](https://user-images.githubusercontent.com/113739521/225653413-d3fbe7b4-f281-4416-9cd6-8aa781119eaa.png)
